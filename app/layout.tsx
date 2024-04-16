@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_Georgian } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
+import { Container } from "@/components/container";
 
 const font = Noto_Sans_Georgian({ subsets: ["georgian"] });
 
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <Navbar />
-        {children}
-        </body>
+        <Container>
+          <Navbar />
+          {children}
+        </Container>
+      </body>
     </html>
   );
 }
