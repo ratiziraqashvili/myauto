@@ -19,6 +19,8 @@ export const ProfileButton = () => {
     setIsExpanded((prev) => !prev);
   };
 
+  //   TODO: Create pages
+
   const buttons = [
     {
       label: "ჩემი განცხადებები",
@@ -82,6 +84,7 @@ export const ProfileButton = () => {
           </div>
           <div className="py-2">
             <button className="hover:bg-gray-100 transition duration-500 w-full text-start py-2 px-5 text-[0.9rem]">
+              {/* TODO: Sign out user */}
               გასვლა
             </button>
           </div>

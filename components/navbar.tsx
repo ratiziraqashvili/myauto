@@ -20,21 +20,24 @@ export const Navbar = () => {
           <Search className="size-5 absolute left-3 top-2.5" />
         </div>
       </div>
-      <div className="flex md:gap-7 items-center">
+      <div className="md:flex hidden md:gap-7 items-center">
         <Link href="/add">
           <Button
             variant="amber"
             className="bg-opacity-15 rounded-xl hover:bg-opacity-25 transition duration-500 px-6"
           >
-            <div className="rounded-full bg-[#fd4100] p-[0.20rem] mr-2">
+            <div className="rounded-full bg-[#fd4100] p-[0.20rem] lg:mr-2">
               <Plus className="size-3 text-white" strokeWidth={4} />
             </div>
-            <span className="md:block hidden text-[#fd4100] text-xs">
+            <span className="lg:block hidden text-[#fd4100] text-xs">
               დამატება
             </span>
           </Button>
         </Link>
         <ProfileButton />
+      </div>
+      <div className="flex md:hidden">
+        
       </div>
     </div>
   );
