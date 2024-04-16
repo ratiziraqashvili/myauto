@@ -4,6 +4,7 @@ import { Input } from "./ui/input";
 import { Plus, Search } from "lucide-react";
 import { Button } from "./ui/button";
 import { ProfileButton } from "./profile-button";
+import { MobileNavMenu } from "./mobile-nav-menu";
 
 export const Navbar = () => {
   return (
@@ -36,8 +37,11 @@ export const Navbar = () => {
         </Link>
         <ProfileButton />
       </div>
-      <div className="flex md:hidden">
-        
+      <div className="flex md:hidden gap-8">
+        <button>
+          <Search strokeWidth={2} className="size-6" />
+        </button>
+        <MobileNavMenu />
       </div>
     </div>
   );
