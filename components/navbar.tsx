@@ -1,17 +1,18 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Input } from "./ui/input";
 import { Plus, Search, User } from "lucide-react";
 import { Button } from "./ui/button";
 import { ProfileButton } from "./profile-button";
 import { MobileNavMenu } from "./mobile-nav-menu";
+import { LoginButton } from "./auth/login-button";
+import { MyAuto } from "./images/myauto";
 
 export const Navbar = () => {
   return (
     <div className="fixed top-0 flex justify-between px-7 py-3 items-center bg-white z-50 w-full">
       <div className="flex md:gap-7 items-center">
-        <Link className="relative w-36 h-12" href="/">
-          <Image src="/myauto.jpg" alt="myauto" fill />
+        <Link href="/">
+          <MyAuto />
         </Link>
         <div className="relative hidden md:flex">
           <Input
@@ -36,10 +37,12 @@ export const Navbar = () => {
           </Button>
         </Link>
         {/* <ProfileButton /> */}
-        <Button variant="outline">
-          <User />
-          <span className="text-[0.85rem] ml-2">შესვლა</span>
-        </Button>
+        <LoginButton>
+          <Button variant="outline">
+            <User />
+            <span className="text-[0.85rem] ml-2">შესვლა</span>
+          </Button>
+        </LoginButton>
       </div>
       <div className="flex md:hidden gap-8">
         <button>
