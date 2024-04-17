@@ -34,7 +34,9 @@ export const MobileNavMenu = () => {
         <div className="pt-4 flex flex-col gap-2">
           {buttons.map((button) => (
             <Link href={button.href}>
-              <button className="hover:text-[#fd4100] text-lg">{button.label}</button>
+              <button className="hover:text-[#fd4100] text-lg">
+                {button.label}
+              </button>
             </Link>
           ))}
         </div>

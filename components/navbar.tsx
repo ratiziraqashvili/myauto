@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "./ui/input";
-import { Plus, Search } from "lucide-react";
+import { Plus, Search, User } from "lucide-react";
 import { Button } from "./ui/button";
 import { ProfileButton } from "./profile-button";
 import { MobileNavMenu } from "./mobile-nav-menu";
@@ -35,7 +35,11 @@ export const Navbar = () => {
             </span>
           </Button>
         </Link>
-        <ProfileButton />
+        {/* <ProfileButton /> */}
+        <Button variant="outline">
+          <User />
+          <span className="text-[0.85rem] ml-2">შესვლა</span>
+        </Button>
       </div>
       <div className="flex md:hidden gap-8">
         <button>

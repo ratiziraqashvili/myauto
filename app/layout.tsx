@@ -3,6 +3,7 @@ import { Noto_Sans_Georgian } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Container } from "@/components/container";
+import { MobileBottomNavbar } from "@/components/mobile-bottom-navbar";
 
 const font = Noto_Sans_Georgian({ subsets: ["georgian"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <Container>
           <Navbar />
           {children}
+          <MobileBottomNavbar />
         </Container>
       </body>
     </html>
