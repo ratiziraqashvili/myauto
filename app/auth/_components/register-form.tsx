@@ -1,5 +1,6 @@
 "use client";
 
+import { register } from "@/actions/register";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -10,38 +11,22 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RegisterSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const formSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 characters long",
-  }),
-  gender: z.enum(["მდედრობითი", "მამრობითი"]),
-  name: z
-    .string()
-    .min(3, {
-      message: "Name must be at least 3 characters long",
-    })
-    .max(15, {
-      message: "Name should not be more than 15 characters long",
-    }),
-  lastName: z.string().min(1, {
-    message: "Last name is required",
-  }),
-  phone: z.string().optional(),
-});
-
 export const RegisterForm = () => {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+  const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof RegisterSchema>>({
+    resolver: zodResolver(RegisterSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -50,8 +35,16 @@ export const RegisterForm = () => {
 
   const { handleSubmit } = form;
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+    setError("");
+    setSuccess("");
+
+    startTransition(() => {
+      register(values).then((data) => {
+        setError(data.error);
+        setSuccess(data.success);
+      });
+    });
   };
 
   const onInputTypeChange = () => {
@@ -68,6 +61,7 @@ export const RegisterForm = () => {
             <FormItem>
               <FormControl>
                 <Input
+                  disabled={isPending}
                   className="py-7 focus-visible:ring-blue-500"
                   placeholder="ელფოსტა"
                   {...field}
@@ -84,6 +78,7 @@ export const RegisterForm = () => {
             <FormItem className="relative">
               <FormControl>
                 <Input
+                  disabled={isPending}
                   className="py-7 focus-visible:ring-blue-500"
                   type={isPasswordHidden ? "password" : "text"}
                   placeholder="პაროლი"
@@ -115,6 +110,7 @@ export const RegisterForm = () => {
               <div>
                 <h1 className="text-muted-foreground pb-5">სქესი</h1>
                 <RadioGroup
+                  disabled={isPending}
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                   className="flex"
@@ -150,6 +146,7 @@ export const RegisterForm = () => {
             <FormItem>
               <FormControl>
                 <Input
+                  disabled={isPending}
                   className="py-7 focus-visible:ring-blue-500"
                   placeholder="სახელი"
                   {...field}
@@ -166,6 +163,7 @@ export const RegisterForm = () => {
             <FormItem>
               <FormControl>
                 <Input
+                  disabled={isPending}
                   className="py-7 focus-visible:ring-blue-500"
                   placeholder="გვარი"
                   {...field}
@@ -182,6 +180,7 @@ export const RegisterForm = () => {
             <FormItem>
               <FormControl>
                 <Input
+                  disabled={isPending}
                   className="py-7 focus-visible:ring-blue-500"
                   placeholder="ტელეფონის ნომერი"
                   {...field}
@@ -194,6 +193,7 @@ export const RegisterForm = () => {
         <Button
           className="bg-blue-500 rounded-3xl hover:bg-blue-400 transition duration-300 py-6 tracking-wider"
           type="submit"
+          disabled={isPending}
         >
           რეგისტრაცია
         </Button>
