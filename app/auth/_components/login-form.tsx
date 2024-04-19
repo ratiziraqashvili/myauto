@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOff } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -51,7 +52,7 @@ export const LoginForm = () => {
             <FormItem>
               <FormControl>
                 <Input
-                  className="py-7 placeholder:font-semibold focus-visible:ring-blue-500"
+                  className="py-7 focus-visible:ring-blue-500"
                   placeholder="ელფოსტა"
                   {...field}
                 />
@@ -67,7 +68,7 @@ export const LoginForm = () => {
             <FormItem className="relative">
               <FormControl>
                 <Input
-                  className="py-7 placeholder:font-semibold focus-visible:ring-blue-500"
+                  className="py-7 focus-visible:ring-blue-500"
                   type={isPasswordHidden ? "password" : "text"}
                   placeholder="პაროლი"
                   {...field}
@@ -90,8 +91,21 @@ export const LoginForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">შესვლა</Button>
+        <Button
+          className="bg-blue-500 rounded-3xl hover:bg-blue-400 transition duration-300 py-6 tracking-wider"
+          type="submit"
+        >
+          შესვლა
+        </Button>
       </form>
+      <div className="pt-5">
+        <p className="text-center">
+          <span className="text-muted-foreground">არ გაქვს ანგარიში? - </span>
+          <Link href="/auth/register" className="text-blue-500 cursor-pointer">
+            შექმენი
+          </Link>
+        </p>
+      </div>
     </Form>
   );
 };
