@@ -10,7 +10,7 @@ export const RegisterSchema = z.object({
     password: z.string().min(8, {
       message: "Password must be at least 8 characters long",
     }),
-    gender: z.enum(["მდედრობითი", "მამრობითი"]),
+    gender: z.enum(["Female", "Male"]),
     name: z
       .string()
       .min(3, {

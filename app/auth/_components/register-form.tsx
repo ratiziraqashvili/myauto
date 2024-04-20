@@ -1,6 +1,8 @@
 "use client";
 
 import { register } from "@/actions/register";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -30,6 +32,10 @@ export const RegisterForm = () => {
     defaultValues: {
       email: "",
       password: "",
+      gender: undefined,
+      name: "",
+      lastName: "",
+      phone: "",
     },
   });
 
@@ -116,7 +122,7 @@ export const RegisterForm = () => {
                   className="flex"
                 >
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="მდედრობითი" id="gender-female" />
+                    <RadioGroupItem value="Female" id="gender-female" />
                     <label
                       htmlFor="gender-female"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -125,7 +131,7 @@ export const RegisterForm = () => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="მამრობითი" id="gender-male" />
+                    <RadioGroupItem value="Male" id="gender-male" />
                     <label
                       htmlFor="gender-male"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -190,6 +196,8 @@ export const RegisterForm = () => {
             </FormItem>
           )}
         />
+        <FormError message={error} />
+        <FormSuccess message={success} />
         <Button
           className="bg-blue-500 rounded-3xl hover:bg-blue-400 transition duration-300 py-6 tracking-wider"
           type="submit"

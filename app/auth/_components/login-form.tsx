@@ -1,6 +1,8 @@
 "use client";
 
 import { login } from "@/actions/login";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -99,6 +101,8 @@ export const LoginForm = () => {
             </FormItem>
           )}
         />
+        <FormError message={error} />
+        <FormSuccess message={success} />
         <Button
           className="bg-blue-500 rounded-3xl hover:bg-blue-400 transition duration-300 py-6 tracking-wider"
           type="submit"
