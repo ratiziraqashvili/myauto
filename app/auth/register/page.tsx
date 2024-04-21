@@ -4,7 +4,7 @@ import { RegisterForm } from "../_components/register-form";
 
 const LoginPage = () => {
   return (
-    <div className="flex flex-col w-full md:w-[60%] lg:w-[40%] md:px-0 px-5">
+    <div className="flex flex-col w-full md:w-[60%] lg:w-[40%] md:px-0 px-5 pt-10">
       <div>
         <Tnet />
       </div>

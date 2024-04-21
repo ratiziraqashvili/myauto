@@ -206,7 +206,7 @@ export const RegisterForm = () => {
           რეგისტრაცია
         </Button>
       </form>
-      <div className="pt-5">
+      <div className="py-5">
         <p className="text-center">
           <span className="text-muted-foreground">არსებული ანგარიშით </span>
           <Link href="/auth/login" className="text-blue-500 cursor-pointer">

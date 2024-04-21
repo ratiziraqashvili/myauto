@@ -11,6 +11,7 @@ import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { signOut } from "@/auth";
 
 export const ProfileButton = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -68,7 +69,7 @@ export const ProfileButton = () => {
             <ProfilePicture className="size-10" />
             <div className="flex flex-col">
               <span className="truncate w-40 text-sm">
-                rziraqashvili@gmail.comssssssssssssssssssssssssssssssssssssss
+                rziraqashvili@gmail.com
               </span>
               <span className="text-sm font-sans">ID: Id</span>
             </div>
@@ -83,7 +84,14 @@ export const ProfileButton = () => {
             ))}
           </div>
           <div className="py-2">
-            <button className="hover:bg-gray-100 transition duration-500 w-full text-start py-2 px-5 text-[0.9rem]">
+            <button
+              onClick={async () => {
+                "use server";
+
+                await signOut();
+              }}
+              className="hover:bg-gray-100 transition duration-500 w-full text-start py-2 px-5 text-[0.9rem]"
+            >
               {/* TODO: Sign out user */}
               გასვლა
             </button>
