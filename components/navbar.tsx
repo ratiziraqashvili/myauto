@@ -6,8 +6,14 @@ import { ProfileButton } from "./profile-button";
 import { MobileNavMenu } from "./mobile-nav-menu";
 import { LoginButton } from "./auth/login-button";
 import { MyAuto } from "./images/myauto";
+import { auth } from "@/auth";
+import { getUserById } from "@/data/user";
 
-export const Navbar = () => {
+export const Navbar = async () => {
+  const session = await auth();
+
+  const user = await getUserById(session?.user?.id!)
+
   return (
     <div className="fixed top-0 flex justify-between px-7 py-3 items-center bg-white z-50 w-full">
       <div className="flex md:gap-7 items-center">
@@ -36,13 +42,16 @@ export const Navbar = () => {
             </span>
           </Button>
         </Link>
-        {/* <ProfileButton /> */}
-        <LoginButton>
-          <Button variant="outline">
-            <User />
-            <span className="text-[0.85rem] ml-2">შესვლა</span>
-          </Button>
-        </LoginButton>
+        {!!session ? (
+          <ProfileButton user={user} />
+        ) : (
+          <LoginButton>
+            <Button variant="outline">
+              <User />
+              <span className="text-[0.85rem] ml-2">შესვლა</span>
+            </Button>
+          </LoginButton>
+        )}
       </div>
       <div className="flex md:hidden gap-8">
         <button>

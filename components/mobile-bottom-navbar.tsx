@@ -34,13 +34,15 @@ export const MobileBottomNavbar = () => {
 
   return (
     <div className="w-full flex justify-center fixed bottom-0 z-50 bg-white py-2 md:hidden">
-      <div className="flex justify-between items-center w-[100%]">
+      <div className="flex w-[100%]">
         {routes.map((route, index) => (
-          <>
+          <div
+            key={index}
+            className="flex justify-between items-center w-[100%]"
+          >
             {route.label !== "შესვლა" ? (
               <Link
                 href={route.href}
-                key={index}
                 className="p-3 w-full flex justify-center cursor-pointer flex-col items-center gap-1"
               >
                 <route.icon
@@ -58,7 +60,6 @@ export const MobileBottomNavbar = () => {
               <LoginButton className="w-full">
                 <Link
                   href={route.href}
-                  key={index}
                   className="flex justify-center cursor-pointer flex-col items-center gap-1"
                 >
                   <route.icon
@@ -74,7 +75,7 @@ export const MobileBottomNavbar = () => {
                 </Link>
               </LoginButton>
             )}
-          </>
+          </div>
         ))}
       </div>
     </div>

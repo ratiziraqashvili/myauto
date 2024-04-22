@@ -1,7 +1,11 @@
-const AddPage = () => {
+import { auth } from "@/auth";
+
+const AddPage = async () => {
+    const session = await auth();
+
     return ( 
         <div>
-            add page
+            {JSON.stringify(session)}
         </div>
      );
 }
