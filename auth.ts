@@ -13,9 +13,15 @@ export const {
 } = NextAuth({
     callbacks: {
         async session({ token, session }) {
+            const userId = session?.user?.id || token?.sub;
+
             if (token.sub && session.user) {
                 session.user.id = token.sub;
             }
+
+            const user = userId ? await getUserById(userId) : null;
+
+            if (!user) return null as any;
 
             return session;
         },
@@ -24,7 +30,7 @@ export const {
 
             const existingUser = await getUserById(token.sub);
 
-            if (!existingUser) return token;
+            if (!existingUser) return null;
             
             return token;
         }

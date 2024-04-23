@@ -14,6 +14,8 @@ export const Navbar = async () => {
 
   const user = await getUserById(session?.user?.id!)
 
+  console.log(session)
+
   return (
     <div className="fixed top-0 flex justify-between px-7 py-3 items-center bg-white z-50 w-full">
       <div className="flex md:gap-7 items-center">
