@@ -1,13 +1,13 @@
-import { auth } from "@/auth";
+import { PostDetails } from "./_components/post-details";
+import { PostForms } from "./_components/post-forms";
 
 const AddPage = async () => {
-    const session = await auth();
+  return (
+    <div className="flex gap-2 md:flex-row flex-col relative w-[90%] mx-auto md:w-[77%] lg:w-[75%]">
+      <PostDetails />
+      <PostForms />
+    </div>
+  );
+};
 
-    return ( 
-        <div className="">
-            fsfsf
-        </div>
-     );
-}
- 
 export default AddPage;
