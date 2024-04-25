@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Georgian } from "next/font/google";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
 
 const font = Noto_Sans_Georgian({ subsets: ["georgian"] });
 
@@ -17,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-          {children}
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   );

@@ -23,7 +23,6 @@ import { z } from "zod";
 export const LoginForm = () => {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -38,12 +37,10 @@ export const LoginForm = () => {
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
-    setSuccess("");
 
     startTransition(() => {
       login(values).then((data) => {
-        setError(data.error);
-        setSuccess(data.success);
+        setError(data?.error);
       });
     });
   };
@@ -62,6 +59,7 @@ export const LoginForm = () => {
             <FormItem>
               <FormControl>
                 <Input
+                  disabled={isPending}
                   className="py-7 focus-visible:ring-blue-500"
                   placeholder="ელფოსტა"
                   {...field}
@@ -78,6 +76,7 @@ export const LoginForm = () => {
             <FormItem className="relative">
               <FormControl>
                 <Input
+                  disabled={isPending}
                   className="py-7 focus-visible:ring-blue-500"
                   type={isPasswordHidden ? "password" : "text"}
                   placeholder="პაროლი"
@@ -102,8 +101,8 @@ export const LoginForm = () => {
           )}
         />
         <FormError message={error} />
-        <FormSuccess message={success} />
         <Button
+          disabled={isPending}
           className="bg-blue-500 rounded-3xl hover:bg-blue-400 transition duration-300 py-6 tracking-wider"
           type="submit"
         >

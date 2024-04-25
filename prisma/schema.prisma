@@ -18,35 +18,119 @@ model User {
   name          String     @unique
   lastName      String
   email         String     @unique
-  phone         String?     @unique
+  phone         String?    @unique
   emailVerified DateTime?
   image         String?
   password      String?
   gender        GenderType
-  accounts      Account[]
+  vehicle       Vehicle[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
+enum VehicleType {
+  Car
+  SpecialVehicle
+  Motorcycle
+}
+
+enum RentingType {
+  ForSale
+  ForRent
+}
+
+enum LengthUnitType {
+  KM
+  MI
+}
+
+enum SteeringWheelType {
+  Right
+  Left
+}
+
+enum TransmissionType {
+  Manual
+  Automatic
+  Tiptronic
+  Variator
+}
+
+enum FuelType {
+  Gasoline
+  Diesel
+  Electric
+  Hybrid
+  RechargeableHybrid
+  LiquidGas
+  NaturalGas
+  Hydrogen
+}
+
+enum LeadingWheelsType {
+  TWO_THREE
+  FOUR_FIVE
+  GREATER_THAN_FIVE
+}
+
+enum InteriorMaterialType {
+  Piece
+  Leather
+  ArtificialLeather
+}
+
+model Vehicle {
+  id                    String               @id @default(cuid())
+  userId                String
+  user                  User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ownerName             String
+  ownerPhone            String
+  vehicle               VehicleType
+  renting               RentingType
+  manufacturer          String
+  model                 String
+  category              String
+  year                  String
+  month                 String
+  numberOfCylinders     String
+  engineCapacity        String
+  turbo                 Boolean
+  numberOfAirbags       String
+  mileage               String
+  lenghtUnit            LengthUnitType
+  steeringWheel         SteeringWheelType
+  transmission          TransmissionType
+  fuel                  FuelType
+  leadingWheels         LeadingWheelsType
+  catalyst              Boolean
+  color                 String
+  interiorMaterial      InteriorMaterialType
+  interiorMaterialColor String
+  additionalOptions     String
+  description           String
+  location              String
+  customsClearance      Boolean
+  techView              Boolean
+  images                Image[]
+  video                 String
+  price                 String
+  priceWithDeal         Boolean
+  carExchange           Boolean
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([model])
+  @@index([category])
+}
 
-  @@unique([provider, providerAccountId])
+model Image {
+  id        String  @id @default(cuid())
+  vehicleId String
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  url       String  @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

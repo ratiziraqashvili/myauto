@@ -5,9 +5,14 @@ import { Heart, Home, PlusCircle, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LoginButton } from "./auth/login-button";
+import { useSession } from "next-auth/react";
+import { ProfilePicture } from "./profile-picture";
 
 export const MobileBottomNavbar = () => {
+  const { status } = useSession();
   const pathname = usePathname();
+
+  const isUnauthenticated = status === "unauthenticated";
 
   const routes = [
     {
@@ -26,9 +31,9 @@ export const MobileBottomNavbar = () => {
       label: "რჩეულები",
     },
     {
-      icon: User,
-      href: `#`,
-      label: "შესვლა",
+      icon: isUnauthenticated ? User : ProfilePicture,
+      href: isUnauthenticated ? "#" : "/mypage",
+      label: isUnauthenticated ? "შესვლა" : "პროფილი",
     },
   ];
 
@@ -49,7 +54,8 @@ export const MobileBottomNavbar = () => {
                   strokeWidth={1.7}
                   className={cn(
                     "text-gray-800",
-                    pathname === route.href && "text-orange-600"
+                    pathname === route.href && "text-orange-600",
+                    isUnauthenticated ? "" : "size-6"
                   )}
                 />
                 <span className="text-muted-foreground text-[0.7rem]">
@@ -66,7 +72,7 @@ export const MobileBottomNavbar = () => {
                     strokeWidth={1.7}
                     className={cn(
                       "text-gray-800",
-                      pathname === route.href && "text-orange-600"
+                      pathname === route.href && "text-orange-600",
                     )}
                   />
                   <span className="text-muted-foreground text-[0.7rem]">
