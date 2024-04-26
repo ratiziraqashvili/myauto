@@ -1,6 +1,14 @@
+"use client";
+
+import FormContainer from "@/components/form-container";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 export const PostDetails = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const steps = [
     {
       name: "ძირითადი მახასიათებლები",
@@ -24,24 +32,52 @@ export const PostDetails = () => {
     },
   ];
 
+  const onExpand = () => {
+    setIsExpanded((prev) => !prev);
+  };
+
   return (
-    <div className="bg-white rounded-xl w-full lg:w-[24%] p-5 flex flex-col">
-      {steps.map((step) => (
-        <div className="flex gap-4">
-          <div className="flex flex-col items-center">
-            <div className="bg-white rounded-full border-2 border-gray-200 h-4 w-4 cursor-pointer"></div>
-            {step.name !== "კონტაქტი" && (
-              <Separator
-                className="h-10 w-[0.1rem] my-1"
-                orientation="vertical"
-              />
-            )}
-          </div>
-          <ul className="text-[0.75rem] text-gray-400 -mt-[0.165rem] cursor-pointer tracking-wide">
-            {step.name}
-          </ul>
+    <>
+      <FormContainer
+        onClick={onExpand}
+        className="lg:hidden flex items-center justify-between py-2 px-8 rounded-lg cursor-pointer"
+      >
+        <div>
+          {/* progress bar here */}
+          <span className="text-xs text-muted-foreground tracking-wide">
+            ძირითადი მახასიათებლები
+          </span>
         </div>
-      ))}
-    </div>
+
+        <button className="rounded-full p-1 bg-[#f2f3f6]">
+          <ChevronDown
+            className={cn(
+              "transition duration-500 size-4",
+              isExpanded && "rotate-180"
+            )}
+          />
+        </button>
+      </FormContainer>
+      <FormContainer
+        className={cn("w-full lg:w-[24%] px-3 py-6 lg:flex flex-col", isExpanded ? "flex" : "hidden lg:flex")}
+      >
+        {steps.map((step) => (
+          <div className="flex gap-4">
+            <div className="flex flex-col items-center">
+              <div className="bg-white rounded-full border-2 border-gray-200 h-4 w-4 cursor-pointer"></div>
+              {step.name !== "კონტაქტი" && (
+                <Separator
+                  className="h-7 w-[0.1rem] my-1"
+                  orientation="vertical"
+                />
+              )}
+            </div>
+            <ul className="text-[0.75rem] text-gray-400 -mt-[0.165rem] cursor-pointer tracking-wide font-[500]">
+              {step.name}
+            </ul>
+          </div>
+        ))}
+      </FormContainer>
+    </>
   );
 };
