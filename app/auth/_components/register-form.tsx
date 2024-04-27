@@ -122,7 +122,7 @@ export const RegisterForm = () => {
                   className="flex"
                 >
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="Female" id="gender-female" />
+                    <RadioGroupItem circleColor="#FFFFFF" value="Female" id="gender-female" />
                     <label
                       htmlFor="gender-female"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -131,7 +131,7 @@ export const RegisterForm = () => {
                     </label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="Male" id="gender-male" />
+                    <RadioGroupItem circleColor="#FFFFFF" value="Male" id="gender-male" />
                     <label
                       htmlFor="gender-male"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
