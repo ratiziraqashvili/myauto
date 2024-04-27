@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 interface FormContainerProps {
-    className: string;
+    className?: string;
     children: React.ReactNode;
     onClick?: () => void;
 }

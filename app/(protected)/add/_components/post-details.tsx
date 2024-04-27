@@ -60,10 +60,13 @@ export const PostDetails = () => {
         </button>
       </FormContainer>
       <FormContainer
-        className={cn("w-full lg:w-[24%] px-3 py-6 lg:flex flex-col", isExpanded ? "flex" : "hidden lg:flex")}
+        className={cn(
+          "w-full lg:w-[24%] px-11 lg:px-3 py-6 lg:flex flex-col",
+          isExpanded ? "flex" : "hidden lg:flex"
+        )}
       >
         {steps.map((step) => (
-          <div className="flex gap-4">
+          <div key={step.name} className="flex gap-4">
             <div className="flex flex-col items-center">
               <div className="bg-white rounded-full border-2 border-gray-200 h-4 w-4 cursor-pointer"></div>
               {step.name !== "კონტაქტი" && (
