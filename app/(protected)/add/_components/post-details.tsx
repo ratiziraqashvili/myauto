@@ -1,5 +1,6 @@
 "use client";
 
+import DoughnutChart from "@/components/doughnut-chart";
 import FormContainer from "@/components/form-container";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
@@ -42,9 +43,9 @@ export const PostDetails = () => {
         onClick={onExpand}
         className="lg:hidden flex items-center justify-between py-2 px-8 rounded-lg cursor-pointer"
       >
-        <div>
-          {/* progress bar here */}
-          <span className="text-xs text-muted-foreground tracking-wide">
+        <div className="flex w-[40%] items-center gap-2">
+          <DoughnutChart />
+          <span className="text-xs text-muted-foreground tracking-wide text-nowrap">
             ძირითადი მახასიათებლები
           </span>
         </div>
