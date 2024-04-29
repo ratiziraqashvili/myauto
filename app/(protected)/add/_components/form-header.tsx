@@ -67,7 +67,7 @@ export const FormHeader = ({ control }: FormHeaderProps) => {
                 />
                 <span
                   className={cn(
-                    "text-sm ml-3 sm:block hidden text-gray-600",
+                    "text-sm ml-3 md:block hidden text-gray-600",
                     selectedOption === button.value && "text-black"
                   )}
                 >
@@ -82,7 +82,7 @@ export const FormHeader = ({ control }: FormHeaderProps) => {
         name="rentingType"
         control={control}
         render={({ field }) => (
-          <div className="px-10 py-5">
+          <div className="px-10 py-7">
             <RadioGroup
               onValueChange={field.onChange}
               defaultValue={field.value}
@@ -91,7 +91,7 @@ export const FormHeader = ({ control }: FormHeaderProps) => {
               <div className="flex items-center space-x-2">
                 <RadioGroupItem
                   className={cn(
-                    "bg-white border-gray-400 border-2 size-5 transition duration-500",
+                    "bg-white border-gray-300 border-2 size-5 transition duration-500",
                     field.value === "ForSale" && "border-[#fd4100]"
                   )}
                   circleColor="#fd4100"
@@ -102,7 +102,7 @@ export const FormHeader = ({ control }: FormHeaderProps) => {
                   htmlFor="for-sale"
                   className={cn(
                     "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-500 cursor-pointer transition duration-300",
-                    field.value === "ForSale" && "text-black"
+                    field.value === "ForSale" && "text-black/80"
                   )}
                 >
                   იყიდება
@@ -111,7 +111,7 @@ export const FormHeader = ({ control }: FormHeaderProps) => {
               <div className="flex items-center space-x-2">
                 <RadioGroupItem
                   className={cn(
-                    "bg-white border-gray-400 border-2 size-5 transition duration-500",
+                    "bg-white border-gray-300 border-2 size-5 transition duration-500",
                     field.value === "ForRent" && "border-[#fd4100]"
                   )}
                   circleColor="#fd4100"
@@ -122,7 +122,7 @@ export const FormHeader = ({ control }: FormHeaderProps) => {
                   htmlFor="for-rent"
                   className={cn(
                     "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-500 cursor-pointer transition duration-300",
-                    field.value === "ForRent" && "text-black"
+                    field.value === "ForRent" && "text-black/80"
                   )}
                 >
                   ქირავდება

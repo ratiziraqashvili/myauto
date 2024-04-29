@@ -1,10 +1,10 @@
 "use client";
 
+import { ArrowButton } from "@/components/arrow-button";
 import DoughnutChart from "@/components/doughnut-chart";
 import FormContainer from "@/components/form-container";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 export const PostDetails = () => {
@@ -49,15 +49,8 @@ export const PostDetails = () => {
             ძირითადი მახასიათებლები
           </span>
         </div>
-
-        <button className="rounded-full p-1 bg-[#f2f3f6]">
-          <ChevronDown
-            className={cn(
-              "transition duration-500 size-4",
-              isExpanded && "rotate-180"
-            )}
-          />
-        </button>
+        
+        <ArrowButton isExpanded={isExpanded} />
       </FormContainer>
       <FormContainer
         className={cn(
