@@ -59,21 +59,17 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
           render={({ field }) => (
             <div>
               <Select
-                onValueChange={() => field.onChange}
+                onValueChange={(value) => {
+                  field.onChange(value);
+                  onBrandChange(value);
+                }}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="მწარმოებელი" />
                 </SelectTrigger>
                 <SelectContent>
                   {carBrandsArray.map((brand) => (
-                    <SelectItem
-                      onClick={() => {
-                        console.log("clicked")
-                        onBrandChange(brand)
-                      }}
-                      key={brand}
-                      value={brand}
-                    >
+                    <SelectItem key={brand} value={brand}>
                       {brand}
                     </SelectItem>
                   ))}
