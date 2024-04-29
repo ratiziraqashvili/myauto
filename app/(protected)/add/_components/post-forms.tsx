@@ -14,7 +14,8 @@ const RentingType = z.enum(["ForSale", "ForRent"]);
 export const formSchema = z.object({
   vehicleType: VehicleType,
   rentingType: RentingType,
-  manufacturer: z.string()
+  manufacturer: z.string().min(1),
+  model: z.string().min(1),
 });
 
 export const PostForms = () => {
@@ -24,6 +25,7 @@ export const PostForms = () => {
       vehicleType: "Car",
       rentingType: "ForSale",
       manufacturer: "",
+      model: "",
     },
   });
 

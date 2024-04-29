@@ -19,21 +19,26 @@ interface MainFeaturesProps {
   control: Control<z.infer<typeof formSchema>>;
 }
 
+interface ModelType {
+  Make_ID: number;
+  Make_Name: string;
+  Model_ID: number;
+  Model_Name: string;
+}
+
 export const MainFeatures = ({ control }: MainFeaturesProps) => {
   const [brand, setBrand] = useState("");
-  const [models, setModels] = useState([]);
+  const [models, setModels] = useState<ModelType[] | never>([]);
 
   const fetchModels = async (make: string) => {
     const response = await fetch(
       `https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/${make}?format=json`
     );
-    console.log("response", response);
     const data = await response.json();
     return data.Results;
   };
 
   const onBrandChange = (brand: string) => {
-    console.log(brand);
     setBrand(brand);
   };
 
@@ -43,8 +48,9 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
       .catch((err) => console.error("error fetching models:", err));
   }, [brand]);
 
+  const isThereModel = models?.length > 0;
+
   console.log("models", models);
-  console.log("brand", brand);
 
   return (
     <FormContainer>
@@ -71,6 +77,26 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                   {carBrandsArray.map((brand) => (
                     <SelectItem key={brand} value={brand}>
                       {brand}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+        />
+        <Controller
+          control={control}
+          name="model"
+          render={({ field }) => (
+            <div>
+              <Select disabled={!isThereModel} onValueChange={field.onChange}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="მოდელი" />
+                </SelectTrigger>
+                <SelectContent>
+                  {models?.map((model) => (
+                    <SelectItem key={model.Model_Name} value={model.Model_Name}>
+                      {model.Model_Name}
                     </SelectItem>
                   ))}
                 </SelectContent>
