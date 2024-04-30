@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { categories } from "@/constants/categories";
 import { getYears } from "@/constants/years";
 import { months } from "@/constants/months";
+import { getNumberOfCylinders } from "@/constants/number-of-cylinders";
 
 interface MainFeaturesProps {
   control: Control<z.infer<typeof formSchema>>;
@@ -36,6 +37,7 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
   const [models, setModels] = useState<ModelType[] | never>([]);
 
   const years = getYears();
+  const numberOfCylinders = getNumberOfCylinders();
 
   const fetchModels = async (make: string) => {
     const response = await fetch(
@@ -191,6 +193,28 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                     {months.map((month) => (
                       <SelectItem key={month} value={month}>
                         {month}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <Controller
+          control={control}
+          name="numberOfCylinders"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Select onValueChange={field.onChange}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="ცილინდრების რაოდენობა" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {numberOfCylinders.map((cylinder) => (
+                      <SelectItem key={cylinder} value={cylinder.toString()}>
+                        {cylinder}
                       </SelectItem>
                     ))}
                   </SelectContent>
