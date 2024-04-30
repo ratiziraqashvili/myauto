@@ -21,6 +21,7 @@ export const formSchema = z.object({
   year: z.string().min(1, "შეავსე ველი"),
   month: z.string().min(1, "შეავსე ველი"),
   numberOfCylinders: z.string().min(1, "შეავსე ველი"),
+  engineCapacity: z.string().min(1, "შეავსეთ ველი"),
 });
 
 export const PostForms = () => {
@@ -36,6 +37,7 @@ export const PostForms = () => {
       year: "",
       month: "",
       numberOfCylinders: "",
+      engineCapacity: "",
     },
   });
 

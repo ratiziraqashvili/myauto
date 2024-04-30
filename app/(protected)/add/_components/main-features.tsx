@@ -20,6 +20,7 @@ import { categories } from "@/constants/categories";
 import { getYears } from "@/constants/years";
 import { months } from "@/constants/months";
 import { getNumberOfCylinders } from "@/constants/number-of-cylinders";
+import { getEngineCapacity } from "@/constants/engine-capacity";
 
 interface MainFeaturesProps {
   control: Control<z.infer<typeof formSchema>>;
@@ -38,6 +39,7 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
 
   const years = getYears();
   const numberOfCylinders = getNumberOfCylinders();
+  const engineCapacity = getEngineCapacity();
 
   const fetchModels = async (make: string) => {
     const response = await fetch(
@@ -215,6 +217,28 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                     {numberOfCylinders.map((cylinder) => (
                       <SelectItem key={cylinder} value={cylinder.toString()}>
                         {cylinder}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <Controller
+          control={control}
+          name="engineCapacity"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Select onValueChange={field.onChange}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="ძრავის მოცულობა" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {engineCapacity.map((num) => (
+                      <SelectItem key={num} value={num}>
+                        {num}
                       </SelectItem>
                     ))}
                   </SelectContent>
