@@ -90,6 +90,7 @@ model Vehicle {
   renting               RentingType
   manufacturer          String
   model                 String
+  customModel           String
   category              String
   year                  String
   month                 String
