@@ -18,6 +18,7 @@ import { FormControl, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { categories } from "@/constants/categories";
 import { getYears } from "@/constants/years";
+import { months } from "@/constants/months";
 
 interface MainFeaturesProps {
   control: Control<z.infer<typeof formSchema>>;
@@ -168,6 +169,28 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                     {years.map((year) => (
                       <SelectItem key={year} value={year.toString()}>
                         {year}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <Controller
+          control={control}
+          name="month"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Select onValueChange={field.onChange}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="თვე" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {months.map((month) => (
+                      <SelectItem key={month} value={month}>
+                        {month}
                       </SelectItem>
                     ))}
                   </SelectContent>

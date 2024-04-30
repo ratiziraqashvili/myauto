@@ -18,7 +18,8 @@ export const formSchema = z.object({
   model: z.string().optional(),
   customModel: z.string().optional(),
   category: z.string().min(1, "შეავსე ველი"),
-  year: z.string().min(1, "შეავსე ველი")
+  year: z.string().min(1, "შეავსე ველი"),
+  month: z.string().min(1, "შეავსე ველი")
 });
 
 export const PostForms = () => {
@@ -31,7 +32,8 @@ export const PostForms = () => {
       model: "",
       customModel: "",
       category: "",
-      year: ""
+      year: "",
+      month: ""
     },
   });
 
