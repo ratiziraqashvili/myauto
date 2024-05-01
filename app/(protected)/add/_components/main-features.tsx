@@ -305,9 +305,16 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input type="number" {...field} placeholder="ჩაწერე გარბენი" />
+                <Select onValueChange={field.onChange}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="კმ" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="KM">კმ</SelectItem>
+                    <SelectItem value="MI">მილი</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
