@@ -6,7 +6,7 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Container>
       <Navbar />
-      <div className="bg-[#f2f3f6] h-[100vh] pt-[4.5rem]">{children}</div>
+      <div className="bg-[#f2f3f6] h-full pt-[4.5rem]">{children}</div>
       <MobileBottomNavbar />
     </Container>
   );

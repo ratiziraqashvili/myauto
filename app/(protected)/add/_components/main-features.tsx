@@ -21,7 +21,6 @@ import { getYears } from "@/constants/years";
 import { months } from "@/constants/months";
 import { getNumberOfCylinders } from "@/constants/number-of-cylinders";
 import { getEngineCapacity } from "@/constants/engine-capacity";
-import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 
 interface MainFeaturesProps {
@@ -71,7 +70,7 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
         <FormHeading icon={TableProperties} label="ძირითადი მახასიათებლები" />
         <ArrowButton isExpanded={false} />
       </div>
-      <div className="px-6 py-6 grid md:grid-cols-[1.5fr_1fr_0.7fr] md:grid-rows-4 grid-rows-1 gap-3 md:gap-7">
+      <div className="px-6 py-6 grid lg:grid-cols-[1.5fr_1fr_0.7fr] lg:grid-rows-4 grid-rows-1 gap-3 md:gap-7">
         <Controller
           control={control}
           name="manufacturer"
@@ -255,15 +254,60 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Button onClick={(e) => e.preventDefault()} variant="outline">
+                <div className="border border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-full">
                   <Switch
-                    // onClick={(e) => e.preventDefault()}
                     checked={field.value}
                     onCheckedChange={field.onChange}
                   />
                   <span className="ml-2 text-gray-600 text-sm">ტურბო</span>
-                </Button>
+                </div>
               </FormControl>
+            </FormItem>
+          )}
+        />
+        <Controller
+          control={control}
+          name="numberOfAirbags"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Select onValueChange={field.onChange}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="აირბეგების რაოდენობა" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {numberOfCylinders.map((cylinder) => (
+                      <SelectItem key={cylinder} value={cylinder.toString()}>
+                        {cylinder}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <Controller
+          control={control}
+          name="mileage"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input type="number" {...field} placeholder="ჩაწერე გარბენი" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Controller
+          control={control}
+          name="mileage"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input type="number" {...field} placeholder="ჩაწერე გარბენი" />
+              </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />

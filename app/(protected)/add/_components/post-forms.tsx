@@ -10,6 +10,7 @@ import { MainFeatures } from "./main-features";
 
 const VehicleType = z.enum(["Car", "SpecialVehicle", "Motorcycle"]);
 const RentingType = z.enum(["ForSale", "ForRent"]);
+const LengthUnitType = z.enum(["KM", "MI"])
 
 export const formSchema = z.object({
   vehicleType: VehicleType,
@@ -23,6 +24,9 @@ export const formSchema = z.object({
   numberOfCylinders: z.string().min(1, "შეავსე ველი"),
   engineCapacity: z.string().min(1, "შეავსეთ ველი"),
   turbo: z.boolean(),
+  numberOfAirbags: z.string().min(1, "შეავსეთ ველი"),
+  mileage: z.string().min(1, "შეავსეთ ველი"),
+  lenghtUnit: LengthUnitType,
 });
 
 export const PostForms = () => {
@@ -40,6 +44,9 @@ export const PostForms = () => {
       numberOfCylinders: "",
       engineCapacity: "",
       turbo: false,
+      numberOfAirbags: "",
+      mileage: "",
+      lenghtUnit: "KM",
     },
   });
 
