@@ -21,6 +21,8 @@ import { getYears } from "@/constants/years";
 import { months } from "@/constants/months";
 import { getNumberOfCylinders } from "@/constants/number-of-cylinders";
 import { getEngineCapacity } from "@/constants/engine-capacity";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 
 interface MainFeaturesProps {
   control: Control<z.infer<typeof formSchema>>;
@@ -243,6 +245,24 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                     ))}
                   </SelectContent>
                 </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <Controller
+          control={control}
+          name="turbo"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Button onClick={(e) => e.preventDefault()} variant="outline">
+                  <Switch
+                    // onClick={(e) => e.preventDefault()}
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                  <span className="ml-2 text-gray-600 text-sm">ტურბო</span>
+                </Button>
               </FormControl>
             </FormItem>
           )}
