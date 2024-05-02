@@ -5,7 +5,7 @@ import { FormHeader } from "./form-header";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import * as z from "zod"
 import { MainFeatures } from "./main-features";
 
 const VehicleType = z.enum(["Car", "SpecialVehicle", "Motorcycle"]);
@@ -50,8 +50,8 @@ export const PostForms = () => {
     },
   });
 
-  const { handleSubmit, control } = form;
-
+  const { handleSubmit, control, formState: { errors } } = form;
+  
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submit", values);
   }
@@ -63,7 +63,7 @@ export const PostForms = () => {
         className="flex-1 flex flex-col gap-4"
       >
         <FormHeader control={control} />
-        <MainFeatures control={control} />
+        <MainFeatures errors={errors} control={control} />
         <button type="submit">submit</button>
       </form>
     </Form>

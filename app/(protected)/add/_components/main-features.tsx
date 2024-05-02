@@ -2,8 +2,8 @@ import FormContainer from "@/components/form-container";
 import { FormHeading } from "./form-heading";
 import { TableProperties } from "lucide-react";
 import { ArrowButton } from "@/components/arrow-button";
-import { Control, Controller } from "react-hook-form";
-import { z } from "zod";
+import { Control, Controller, FieldErrors } from "react-hook-form";
+import * as z from "zod";
 import { formSchema } from "./post-forms";
 import {
   Select,
@@ -22,9 +22,12 @@ import { months } from "@/constants/months";
 import { getNumberOfCylinders } from "@/constants/number-of-cylinders";
 import { getEngineCapacity } from "@/constants/engine-capacity";
 import { Switch } from "@/components/ui/switch";
+import { SecondPartOfMainFeatures } from "./second-part-of-main-features";
+import { cn } from "@/lib/utils";
 
 interface MainFeaturesProps {
   control: Control<z.infer<typeof formSchema>>;
+  errors: FieldErrors;
 }
 
 interface ModelType {
@@ -34,7 +37,7 @@ interface ModelType {
   Model_Name: string;
 }
 
-export const MainFeatures = ({ control }: MainFeaturesProps) => {
+export const MainFeatures = ({ control, errors }: MainFeaturesProps) => {
   const [brand, setBrand] = useState("");
   const [models, setModels] = useState<ModelType[] | never>([]);
 
@@ -70,7 +73,7 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
         <FormHeading icon={TableProperties} label="ძირითადი მახასიათებლები" />
         <ArrowButton isExpanded={false} />
       </div>
-      <div className="px-6 py-6 grid lg:grid-cols-[1.5fr_1fr_0.7fr] lg:grid-rows-4 grid-rows-1 gap-3 md:gap-7">
+      <div className="px-6 py-6 grid lg:grid-cols-[1.5fr_1fr_0.7fr] lg:grid-rows-4 grid-rows-1 gap-3 md:gap-7 border-b">
         <Controller
           control={control}
           name="manufacturer"
@@ -83,7 +86,12 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                     onBrandChange(value);
                   }}
                 >
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger
+                    className={cn(
+                      "w-full",
+                      errors.manufacturer && "border-destructive"
+                    )}
+                  >
                     <SelectValue placeholder="მწარმოებელი" />
                   </SelectTrigger>
                   <SelectContent>
@@ -95,7 +103,11 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                   </SelectContent>
                 </Select>
               </FormControl>
-              <FormMessage />
+              {errors.manufacturer && (
+                <FormMessage>
+                  {errors.manufacturer.message as React.ReactNode}
+                </FormMessage>
+              )}
             </FormItem>
           )}
         />
@@ -144,7 +156,12 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
             <FormItem>
               <FormControl>
                 <Select onValueChange={field.onChange}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger
+                    className={cn(
+                      "w-full",
+                      errors.category && "border-destructive"
+                    )}
+                  >
                     <SelectValue placeholder="კატეგორია" />
                   </SelectTrigger>
                   <SelectContent>
@@ -156,7 +173,11 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                   </SelectContent>
                 </Select>
               </FormControl>
-              <FormMessage />
+              {errors.category && (
+                <FormMessage>
+                  {errors.category.message as React.ReactNode}
+                </FormMessage>
+              )}
             </FormItem>
           )}
         />
@@ -167,7 +188,12 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
             <FormItem>
               <FormControl>
                 <Select onValueChange={field.onChange}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger
+                    className={cn(
+                      "w-full",
+                      errors.year && "border-destructive"
+                    )}
+                  >
                     <SelectValue placeholder="წელი" />
                   </SelectTrigger>
                   <SelectContent>
@@ -179,6 +205,11 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                   </SelectContent>
                 </Select>
               </FormControl>
+              {errors.year && (
+                <FormMessage>
+                  {errors.year.message as React.ReactNode}
+                </FormMessage>
+              )}
             </FormItem>
           )}
         />
@@ -189,7 +220,12 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
             <FormItem>
               <FormControl>
                 <Select onValueChange={field.onChange}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger
+                    className={cn(
+                      "w-full",
+                      errors.month && "border-destructive"
+                    )}
+                  >
                     <SelectValue placeholder="თვე" />
                   </SelectTrigger>
                   <SelectContent>
@@ -201,6 +237,11 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                   </SelectContent>
                 </Select>
               </FormControl>
+              {errors.month && (
+                <FormMessage>
+                  {errors.month.message as React.ReactNode}
+                </FormMessage>
+              )}
             </FormItem>
           )}
         />
@@ -211,7 +252,12 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
             <FormItem>
               <FormControl>
                 <Select onValueChange={field.onChange}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger
+                    className={cn(
+                      "w-full",
+                      errors.numberOfCylinders && "border-destructive"
+                    )}
+                  >
                     <SelectValue placeholder="ცილინდრების რაოდენობა" />
                   </SelectTrigger>
                   <SelectContent>
@@ -223,6 +269,11 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                   </SelectContent>
                 </Select>
               </FormControl>
+              {errors.numberOfCylinders && (
+                <FormMessage>
+                  {errors.numberOfCylinders.message as React.ReactNode}
+                </FormMessage>
+              )}
             </FormItem>
           )}
         />
@@ -233,7 +284,12 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
             <FormItem>
               <FormControl>
                 <Select onValueChange={field.onChange}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger
+                    className={cn(
+                      "w-full",
+                      errors.engineCapacity && "border-destructive"
+                    )}
+                  >
                     <SelectValue placeholder="ძრავის მოცულობა" />
                   </SelectTrigger>
                   <SelectContent>
@@ -245,6 +301,11 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                   </SelectContent>
                 </Select>
               </FormControl>
+              {errors.engineCapacity && (
+                <FormMessage>
+                  {errors.engineCapacity.message as React.ReactNode}
+                </FormMessage>
+              )}
             </FormItem>
           )}
         />
@@ -262,6 +323,7 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                   <span className="ml-2 text-gray-600 text-sm">ტურბო</span>
                 </div>
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -272,7 +334,12 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
             <FormItem>
               <FormControl>
                 <Select onValueChange={field.onChange}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger
+                    className={cn(
+                      "w-full",
+                      errors.numberOfAirbags && "border-destructive"
+                    )}
+                  >
                     <SelectValue placeholder="აირბეგების რაოდენობა" />
                   </SelectTrigger>
                   <SelectContent>
@@ -284,6 +351,11 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
                   </SelectContent>
                 </Select>
               </FormControl>
+              {errors.numberOfAirbags && (
+                <FormMessage>
+                  {errors.numberOfAirbags.message as React.ReactNode}
+                </FormMessage>
+              )}
             </FormItem>
           )}
         />
@@ -293,15 +365,27 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input type="number" {...field} placeholder="ჩაწერე გარბენი" />
+                <Input
+                  className={cn(
+                    "w-full",
+                    errors.mileage && "border-destructive"
+                  )}
+                  type="number"
+                  {...field}
+                  placeholder="ჩაწერე გარბენი"
+                />
               </FormControl>
-              <FormMessage />
+              {errors.mileage && (
+                <FormMessage>
+                  {errors.mileage.message as React.ReactNode}
+                </FormMessage>
+              )}
             </FormItem>
           )}
         />
         <Controller
           control={control}
-          name="mileage"
+          name="lenghtUnit"
           render={({ field }) => (
             <FormItem>
               <FormControl>
@@ -319,6 +403,7 @@ export const MainFeatures = ({ control }: MainFeaturesProps) => {
           )}
         />
       </div>
+      <SecondPartOfMainFeatures />
     </FormContainer>
   );
 };
