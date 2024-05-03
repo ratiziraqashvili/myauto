@@ -57,6 +57,7 @@ export const formSchema = z.object({
   leadingWheels: leadingWheelsType,
   doors: DoorsType,
   catalyst: z.string().min(1, { message: "შეავსეთ ველი" }),
+  color: z.string().min(1, { message: "შეავსეთ ველი" })
 });
 
 export const PostForms = () => {
@@ -83,6 +84,7 @@ export const PostForms = () => {
       leadingWheels: undefined,
       doors: undefined,
       catalyst: "",
+      color: "",
     },
   });
 

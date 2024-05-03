@@ -8,13 +8,14 @@ import { Control, Controller } from "react-hook-form";
 import * as z from "zod";
 import { SmallFormHeading } from "./small-form-heading";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { cn } from "@/lib/utils";
 
 interface ToggleGroupFieldProps<Schema extends z.ZodType<any, any>> {
   control: Control<z.infer<Schema>>;
   name: keyof z.infer<Schema>;
   label: string;
   errors: any;
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; color?: string }[];
 }
 
 export const ToggleGroupField = <Schema extends z.ZodType<any, any>>({
@@ -41,7 +42,7 @@ export const ToggleGroupField = <Schema extends z.ZodType<any, any>>({
               className="flex gap-x-4 gap-y-2 flex-wrap pt-2"
               type="single"
             >
-              {options.map(({ value, label }) => (
+              {options.map(({ value, label, color }) => (
                 <ToggleGroupItem
                   key={value}
                   type="button"
@@ -49,7 +50,13 @@ export const ToggleGroupField = <Schema extends z.ZodType<any, any>>({
                   value={value}
                   className="text-gray-800"
                 >
-                  {label}
+                  {color && (
+                    <div
+                      className="size-3 rounded-full border"
+                      style={{ backgroundColor: color }}
+                    />
+                  )}
+                  <span className={cn(color && "ml-2")}>{label}</span>
                 </ToggleGroupItem>
               ))}
             </ToggleGroup>

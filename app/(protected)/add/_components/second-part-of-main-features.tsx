@@ -76,12 +76,26 @@ export const SecondPartOfMainFeatures = ({
       />
       <ToggleGroupField
         control={control}
-        name="catalyst"
-        label="კატალიზატორი"
+        name="color"
+        label="ავტომობილის ფერი"
         errors={errors}
         options={[
-          { value: "true", label: "კი" },
-          { value: "false", label: "არა" },
+          { value: "White", label: "თეთრი", color: "#ffffff" },
+          { value: "Black", label: "შავი", color: "#000000" },
+          { value: "Silver", label: "ვერცხლისფერი", color: "#e0e0e0" },
+          { value: "Grey", label: "რუხი", color: "#7f7f7f" },
+          { value: "Red", label: "წითელი", color: "#eb4137" },
+          { value: "Blue", label: "ლურჯი", color: "#3b8aff" },
+          { value: "Yellow", label: "ყვითელი", color: "#f4d053" },
+          { value: "Green", label: "მწვანე", color: "#1bac18" },
+          { value: "Orange", label: "ნარინჯისფერი", color: "#ff7a29" },
+          { value: "Gold", label: "ოქროსფერი", color: "#d4af37" },
+          { value: "Purple", label: "იისფერი", color: "#8c3bf0" },
+          { value: "Pink", label: "ვარდისფერი", color: "#ec6cc8" },
+          { value: "Beige", label: "ჩალისფერი", color: "#ede1d3" },
+          { value: "Burgundy", label: "შინდისფერი", color: "#990000" },
+          { value: "SkyBlue", label: "ცისფერი", color: "#a2d2ff" },
+          { value: "Brown", label: "ყავისფერი", color: "#926644" },
         ]}
       />
     </div>
