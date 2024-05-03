@@ -63,6 +63,27 @@ export const SecondPartOfMainFeatures = ({
           { value: "Four_Four", label: "4x4" },
         ]}
       />
+      <ToggleGroupField
+        control={control}
+        name="doors"
+        label="კარის რაოდენობა"
+        errors={errors}
+        options={[
+          { value: "Two_Three", label: "2/3" },
+          { value: "Four_Five", label: "4/5" },
+          { value: "Greater_Than_Five", label: ">5" },
+        ]}
+      />
+      <ToggleGroupField
+        control={control}
+        name="catalyst"
+        label="კატალიზატორი"
+        errors={errors}
+        options={[
+          { value: "true", label: "კი" },
+          { value: "false", label: "არა" },
+        ]}
+      />
     </div>
   );
 };

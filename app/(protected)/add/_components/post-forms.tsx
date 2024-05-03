@@ -32,7 +32,9 @@ const FuelType = z.enum(
 const leadingWheelsType = z.enum(["Front", "Back", "Four_Four"], {
   message: "შეავსე ველი",
 });
-const doorsType = z.enum([""])
+const DoorsType = z.enum(["Two_Three", "Four_Five", "Greater_Than_Five"], {
+  message: "შეავსე ველი",
+});
 
 export const formSchema = z.object({
   vehicleType: VehicleType,
@@ -53,7 +55,8 @@ export const formSchema = z.object({
   transmission: TransmissionType,
   fuel: FuelType,
   leadingWheels: leadingWheelsType,
-  doors: 
+  doors: DoorsType,
+  catalyst: z.string().min(1, { message: "შეავსეთ ველი" }),
 });
 
 export const PostForms = () => {
@@ -78,7 +81,8 @@ export const PostForms = () => {
       transmission: undefined,
       fuel: undefined,
       leadingWheels: undefined,
-      doors: undefined
+      doors: undefined,
+      catalyst: "",
     },
   });
 
