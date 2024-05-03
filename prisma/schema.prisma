@@ -75,9 +75,9 @@ enum LeadingWheelsType {
 }
 
 enum NumberOfDoors {
-  TWO_THREE
-  FOUR_FIVE
-  GREATER_THAN_FIVE
+  Two_Three
+  Four_Five
+  Greater_Than_Five
 }
 
 enum InteriorMaterialType {

@@ -47,6 +47,7 @@ export const ToggleGroupField = <Schema extends z.ZodType<any, any>>({
                   type="button"
                   variant="outline"
                   value={value}
+                  className="text-gray-800"
                 >
                   {label}
                 </ToggleGroupItem>

@@ -1,14 +1,6 @@
-import { Control, Controller } from "react-hook-form";
+import { Control } from "react-hook-form";
 import * as z from "zod";
 import { formSchema } from "./post-forms";
-import {
-  FormControl,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { SmallFormHeading } from "./small-form-heading";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { ToggleGroupField } from "./toggle-group-field";
 
 interface SecondPartOfMainFeaturesProps {
@@ -21,7 +13,7 @@ export const SecondPartOfMainFeatures = ({
   errors,
 }: SecondPartOfMainFeaturesProps) => {
   return (
-    <div className="flex flex-col gap-5 px-6 py-6">
+    <div className="flex flex-col gap-12 px-6 py-6">
       <ToggleGroupField<typeof formSchema>
         control={control}
         name="steeringWheel"
@@ -66,14 +58,9 @@ export const SecondPartOfMainFeatures = ({
         label="წამყვანი თვლები"
         errors={errors}
         options={[
-          { value: "Gasoline", label: "ბენზინი" },
-          { value: "Diesel", label: "დიზელი" },
-          { value: "Electric", label: "ელექტრო" },
-          { value: "Hybrid", label: "ჰიბრიდი" },
-          { value: "RechargeableHybrid", label: "დატენვადი ჰიბრიდი" },
-          { value: "LiquidGas", label: "თხევადი გაზი" },
-          { value: "NaturalGas", label: "ბუნებრივი გაზი" },
-          { value: "Hydrogen", label: "წყალბადი" },
+          { value: "Front", label: "წინა" },
+          { value: "Back", label: "უკანა" },
+          { value: "Four_Four", label: "4x4" },
         ]}
       />
     </div>
