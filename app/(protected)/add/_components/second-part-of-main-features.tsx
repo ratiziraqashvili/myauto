@@ -50,6 +50,53 @@ export const SecondPartOfMainFeatures = ({
           </FormItem>
         )}
       />
+      <Controller
+        control={control}
+        name="transmission"
+        render={({ field }) => (
+          <FormItem className="">
+            <FormLabel>
+              <SmallFormHeading label="ტრანსმისია" />
+            </FormLabel>
+            <FormMessage>
+              {errors.transmission?.message as React.ReactNode}
+            </FormMessage>
+            <FormControl>
+              <ToggleGroup
+                value={field.value}
+                onValueChange={(value) => field.onChange(value)}
+                className="space-x-4 pt-2"
+                type="single"
+              >
+                <ToggleGroupItem type="button" variant="outline" value="Manual">
+                  მექანიკა
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  type="button"
+                  variant="outline"
+                  value="Automatic"
+                >
+                  ავტომატიკა
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  type="button"
+                  variant="outline"
+                  value="Tiptronic"
+                >
+                  ტიპტრონიკი
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  type="button"
+                  variant="outline"
+                  value="Variator"
+                >
+                  ვარიატორი
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </FormControl>
+          </FormItem>
+        )}
+      />
     </div>
   );
 };

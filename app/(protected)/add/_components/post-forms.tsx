@@ -12,6 +12,10 @@ const VehicleType = z.enum(["Car", "SpecialVehicle", "Motorcycle"]);
 const RentingType = z.enum(["ForSale", "ForRent"]);
 const LengthUnitType = z.enum(["KM", "MI"]);
 const SteeringWheelType = z.enum(["Right", "Left"], { message: "შეავსე ველი" });
+const TransmissionType = z.enum(
+  ["Manual", "Automatic", "Tiptronic", "Variator"],
+  { message: "შეავსე ველი" }
+);
 
 export const formSchema = z.object({
   vehicleType: VehicleType,
@@ -29,6 +33,7 @@ export const formSchema = z.object({
   mileage: z.string().min(1, "შეავსეთ ველი"),
   lenghtUnit: LengthUnitType,
   steeringWheel: SteeringWheelType,
+  transmission: TransmissionType,
 });
 
 export const PostForms = () => {
