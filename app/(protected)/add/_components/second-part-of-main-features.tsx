@@ -60,6 +60,22 @@ export const SecondPartOfMainFeatures = ({
           { value: "Hydrogen", label: "წყალბადი" },
         ]}
       />
+      <ToggleGroupField
+        control={control}
+        name="leadingWheels"
+        label="წამყვანი თვლები"
+        errors={errors}
+        options={[
+          { value: "Gasoline", label: "ბენზინი" },
+          { value: "Diesel", label: "დიზელი" },
+          { value: "Electric", label: "ელექტრო" },
+          { value: "Hybrid", label: "ჰიბრიდი" },
+          { value: "RechargeableHybrid", label: "დატენვადი ჰიბრიდი" },
+          { value: "LiquidGas", label: "თხევადი გაზი" },
+          { value: "NaturalGas", label: "ბუნებრივი გაზი" },
+          { value: "Hydrogen", label: "წყალბადი" },
+        ]}
+      />
     </div>
   );
 };

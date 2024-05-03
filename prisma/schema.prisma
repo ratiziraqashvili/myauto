@@ -69,6 +69,12 @@ enum FuelType {
 }
 
 enum LeadingWheelsType {
+  Front
+  Back
+  Four_Four
+}
+
+enum NumberOfDoors {
   TWO_THREE
   FOUR_FIVE
   GREATER_THAN_FIVE
@@ -104,6 +110,7 @@ model Vehicle {
   transmission          TransmissionType
   fuel                  FuelType
   leadingWheels         LeadingWheelsType
+  doors                 NumberOfDoors
   catalyst              Boolean
   color                 String
   interiorMaterial      InteriorMaterialType

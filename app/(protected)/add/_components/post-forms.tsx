@@ -29,6 +29,10 @@ const FuelType = z.enum(
   ],
   { message: "შეავსე ველი" }
 );
+const leadingWheelsType = z.enum(
+  ["TWO_THREE", "FOUR_FIVE", "GREATER_THAN_FIVE"],
+  { message: "შეავსე ველი" }
+);
 
 export const formSchema = z.object({
   vehicleType: VehicleType,
@@ -48,6 +52,7 @@ export const formSchema = z.object({
   steeringWheel: SteeringWheelType,
   transmission: TransmissionType,
   fuel: FuelType,
+  leadingWheels: leadingWheelsType,
 });
 
 export const PostForms = () => {
@@ -69,6 +74,9 @@ export const PostForms = () => {
       mileage: "",
       lenghtUnit: "KM",
       steeringWheel: undefined,
+      transmission: undefined,
+      fuel: undefined,
+      leadingWheels: undefined,
     },
   });
 
