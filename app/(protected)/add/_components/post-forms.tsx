@@ -35,6 +35,9 @@ const leadingWheelsType = z.enum(["Front", "Back", "Four_Four"], {
 const DoorsType = z.enum(["Two_Three", "Four_Five", "Greater_Than_Five"], {
   message: "შეავსე ველი",
 });
+const InteriorMaterialType = z.enum(["Piece", "Leather", "ArtificialLeather"], {
+  message: "შეავსე ველი",
+});
 
 export const formSchema = z.object({
   vehicleType: VehicleType,
@@ -57,7 +60,9 @@ export const formSchema = z.object({
   leadingWheels: leadingWheelsType,
   doors: DoorsType,
   catalyst: z.string().min(1, { message: "შეავსეთ ველი" }),
-  color: z.string().min(1, { message: "შეავსეთ ველი" })
+  color: z.string().min(1, { message: "შეავსეთ ველი" }),
+  interiorMaterial: InteriorMaterialType,
+  interiorMaterialColor: z.string().min(1, { message: "შეავსეთ ველი" }),
 });
 
 export const PostForms = () => {
@@ -85,6 +90,8 @@ export const PostForms = () => {
       doors: undefined,
       catalyst: "",
       color: "",
+      interiorMaterial: undefined,
+      interiorMaterialColor: "",
     },
   });
 

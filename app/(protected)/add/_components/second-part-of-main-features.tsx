@@ -13,7 +13,7 @@ export const SecondPartOfMainFeatures = ({
   errors,
 }: SecondPartOfMainFeaturesProps) => {
   return (
-    <div className="flex flex-col gap-12 px-6 py-6">
+    <div className="flex flex-col gap-10 px-6 py-6">
       <ToggleGroupField<typeof formSchema>
         control={control}
         name="steeringWheel"
@@ -98,6 +98,38 @@ export const SecondPartOfMainFeatures = ({
           { value: "Brown", label: "ყავისფერი", color: "#926644" },
         ]}
       />
+      <div className="space-y-6">
+        <ToggleGroupField
+          control={control}
+          name="interiorMaterial"
+          label="სალონის მასალა და ფერი"
+          errors={errors}
+          options={[
+            { value: "Piece", label: "ნაჭერი" },
+            { value: "Leather", label: "ტყავი" },
+            { value: "ArtificialLeather", label: "ხელოვნური ტყავი" },
+          ]}
+        />
+        <ToggleGroupField
+          control={control}
+          name="interiorMaterialColor"
+          label=""
+          errors={errors}
+          options={[
+            { value: "Black", label: "შავი", color: "#000000" },
+            { value: "White", label: "თეთრი", color: "#ffffff" },
+            { value: "Grey", label: "რუხი", color: "#7f7f7f" },
+            { value: "Brown", label: "ყავისფერი", color: "#926644" },
+            { value: "Beige", label: "ჩალისფერი", color: "#ede1d3" },
+            { value: "Red", label: "წითელი", color: "#eb4137" },
+            { value: "Blue", label: "ლურჯი", color: "#3b8aff" },
+            { value: "Yellow", label: "ყვითელი", color: "#f4d053" },
+            { value: "Orange", label: "ნარინჯისფერი", color: "#ff7a29" },
+            { value: "Burgundy", label: "შინდისფერი", color: "#990000" },
+            { value: "Gold", label: "ოქროსფერი", color: "#d4af37" },
+          ]}
+        />
+      </div>
     </div>
   );
 };
