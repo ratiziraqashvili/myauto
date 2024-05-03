@@ -97,6 +97,75 @@ export const SecondPartOfMainFeatures = ({
           </FormItem>
         )}
       />
+      <Controller
+        control={control}
+        name="fuel"
+        render={({ field }) => (
+          <FormItem className="">
+            <FormLabel>
+              <SmallFormHeading label="საწვავის ტიპი" />
+            </FormLabel>
+            <FormMessage>{errors.fuel?.message as React.ReactNode}</FormMessage>
+            <FormControl>
+              <ToggleGroup
+                value={field.value}
+                onValueChange={(value) => field.onChange(value)}
+                className="flex gap-x-4 gap-y-2 flex-wrap pt-2"
+                type="single"
+              >
+                <ToggleGroupItem
+                  type="button"
+                  variant="outline"
+                  value="Gasoline"
+                >
+                  ბენზინი
+                </ToggleGroupItem>
+                <ToggleGroupItem type="button" variant="outline" value="Diesel">
+                  დიზელი
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  type="button"
+                  variant="outline"
+                  value="Electric"
+                >
+                  ელექტრო
+                </ToggleGroupItem>
+                <ToggleGroupItem type="button" variant="outline" value="Hybrid">
+                  ჰიბრიდი
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  type="button"
+                  variant="outline"
+                  value="RechargeableHybrid"
+                >
+                  დატენვადი ჰიბრიდი
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  type="button"
+                  variant="outline"
+                  value="LiquidGas"
+                >
+                  თხევადი გაზი
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  type="button"
+                  variant="outline"
+                  value="NaturalGas"
+                >
+                  ბუნებრივი გაზი
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  type="button"
+                  variant="outline"
+                  value="Hydrogen"
+                >
+                  წყალბადი
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </FormControl>
+          </FormItem>
+        )}
+      />
     </div>
   );
 };

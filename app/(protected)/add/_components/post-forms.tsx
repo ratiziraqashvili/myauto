@@ -16,6 +16,19 @@ const TransmissionType = z.enum(
   ["Manual", "Automatic", "Tiptronic", "Variator"],
   { message: "შეავსე ველი" }
 );
+const FuelType = z.enum(
+  [
+    "Gasoline",
+    "Diesel",
+    "Electric",
+    "Hybrid",
+    "RechargeableHybrid",
+    "LiquidGas",
+    "NaturalGas",
+    "Hydrogen",
+  ],
+  { message: "შეავსე ველი" }
+);
 
 export const formSchema = z.object({
   vehicleType: VehicleType,
@@ -34,6 +47,7 @@ export const formSchema = z.object({
   lenghtUnit: LengthUnitType,
   steeringWheel: SteeringWheelType,
   transmission: TransmissionType,
+  fuel: FuelType,
 });
 
 export const PostForms = () => {
