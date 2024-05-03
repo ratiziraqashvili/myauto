@@ -5,12 +5,13 @@ import { FormHeader } from "./form-header";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod"
+import * as z from "zod";
 import { MainFeatures } from "./main-features";
 
 const VehicleType = z.enum(["Car", "SpecialVehicle", "Motorcycle"]);
 const RentingType = z.enum(["ForSale", "ForRent"]);
-const LengthUnitType = z.enum(["KM", "MI"])
+const LengthUnitType = z.enum(["KM", "MI"]);
+const SteeringWheelType = z.enum(["Right", "Left"], { message: "შეავსე ველი" });
 
 export const formSchema = z.object({
   vehicleType: VehicleType,
@@ -27,6 +28,7 @@ export const formSchema = z.object({
   numberOfAirbags: z.string().min(1, "შეავსეთ ველი"),
   mileage: z.string().min(1, "შეავსეთ ველი"),
   lenghtUnit: LengthUnitType,
+  steeringWheel: SteeringWheelType,
 });
 
 export const PostForms = () => {
@@ -47,11 +49,16 @@ export const PostForms = () => {
       numberOfAirbags: "",
       mileage: "",
       lenghtUnit: "KM",
+      steeringWheel: undefined,
     },
   });
 
-  const { handleSubmit, control, formState: { errors } } = form;
-  
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = form;
+  console.log(errors);
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submit", values);
   }

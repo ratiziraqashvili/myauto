@@ -2,7 +2,7 @@ import FormContainer from "@/components/form-container";
 import { FormHeading } from "./form-heading";
 import { TableProperties } from "lucide-react";
 import { ArrowButton } from "@/components/arrow-button";
-import { Control, Controller, FieldErrors } from "react-hook-form";
+import { Control, Controller } from "react-hook-form";
 import * as z from "zod";
 import { formSchema } from "./post-forms";
 import {
@@ -27,7 +27,7 @@ import { cn } from "@/lib/utils";
 
 interface MainFeaturesProps {
   control: Control<z.infer<typeof formSchema>>;
-  errors: FieldErrors;
+  errors: any;
 }
 
 interface ModelType {
@@ -403,7 +403,7 @@ export const MainFeatures = ({ control, errors }: MainFeaturesProps) => {
           )}
         />
       </div>
-      <SecondPartOfMainFeatures />
+      <SecondPartOfMainFeatures errors={errors} control={control} />
     </FormContainer>
   );
 };
