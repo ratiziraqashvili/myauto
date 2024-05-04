@@ -2,9 +2,22 @@ import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
 import { Button } from "./ui/button";
 
-export const ArrowButton = ({ isExpanded }: { isExpanded: boolean }) => {
+export const ArrowButton = ({
+  isExpanded,
+  onClick,
+}: {
+  isExpanded: boolean;
+  onClick?: () => void;
+}) => {
   return (
-    <Button onClick={(e) => e.preventDefault()} variant="ghost" className="rounded-full transition duration-300 p-1 h-6">
+    <Button
+      onClick={(e) => {
+        onClick?.();
+        e.preventDefault();
+      }}
+      variant="ghost"
+      className="rounded-full transition duration-300 p-1 h-6"
+    >
       <ChevronDown
         className={cn(
           "transition duration-500 size-4",

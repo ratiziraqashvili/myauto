@@ -115,7 +115,7 @@ model Vehicle {
   color                 String
   interiorMaterial      InteriorMaterialType
   interiorMaterialColor String
-  additionalOptions     String
+  additionalParameters  String[]
   description           String
   location              String
   customsClearance      Boolean

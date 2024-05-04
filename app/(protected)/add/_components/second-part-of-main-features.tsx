@@ -13,7 +13,7 @@ export const SecondPartOfMainFeatures = ({
   errors,
 }: SecondPartOfMainFeaturesProps) => {
   return (
-    <div className="flex flex-col gap-10 px-6 py-6">
+    <div className="flex flex-col gap-10 px-6 py-6 border-b">
       <ToggleGroupField<typeof formSchema>
         control={control}
         name="steeringWheel"
@@ -76,6 +76,16 @@ export const SecondPartOfMainFeatures = ({
       />
       <ToggleGroupField
         control={control}
+        name="catalyst"
+        label="კატალიზატორი"
+        errors={errors}
+        options={[
+          { value: "true", label: "კი" },
+          { value: "false", label: "არა" },
+        ]}
+      />
+      <ToggleGroupField
+        control={control}
         name="color"
         label="ავტომობილის ფერი"
         errors={errors}
@@ -128,6 +138,42 @@ export const SecondPartOfMainFeatures = ({
             { value: "Burgundy", label: "შინდისფერი", color: "#990000" },
             { value: "Gold", label: "ოქროსფერი", color: "#d4af37" },
           ]}
+        />
+        <ToggleGroupField
+          control={control}
+          name="additionalParameters"
+          label="დამატებითი პარამეტრები"
+          errors={errors}
+          options={[
+            { value: "ჰიდრავლიკა", label: "ჰიდრავლიკა" },
+            { value: "ბორტკომპიუტერი", label: "ბორტკომპიუტერი" },
+            { value: "კონდიციონერი", label: "კონდიციონერი" },
+            { value: "პარკინგკონტროლი", label: "პარკინგკონტროლი" },
+            { value: "უკანა ხედვის კამერა", label: "უკანა ხედვის კამერა" },
+            { value: "ელექტრო შუშები", label: "ელექტრო შუშები" },
+            { value: "კლიმატკონტროლი", label: "კლიმატკონტროლი" },
+            { value: "კრუიზ-კონტროლი", label: "კრუიზ-კონტროლი" },
+            { value: "Start/Stop სისტემა", label: "Start/Stop სისტემა" },
+            { value: "ლუქი", label: "ლუქი" },
+            { value: "სავარძლის გათბობა", label: "სავარძლის გათბობა" },
+            { value: "სავარძლის მეხსიერება", label: "სავარძლის მეხსიერება" },
+            { value: "ABS", label: "ABS" },
+            {
+              value: "მოცურების საწინააღმდეგო სისტემა",
+              label: "მოცურების საწინააღმდეგო სისტემა",
+            },
+            { value: "ცენტრალური საკეტი", label: "ცენტრალური საკეტი" },
+            { value: "სიგნალიზაცია", label: "სიგნალიზაცია" },
+            { value: "სანისლე ფარები", label: "სანისლე ფარები" },
+            { value: "მონიტორი (ნავიგაცია)", label: "მონიტორი (ნავიგაცია)" },
+            { value: "AUX", label: "AUX" },
+            { value: "Bluetooth", label: "Bluetooth" },
+            { value: "მულტი საჭე", label: "მულტი საჭე" },
+            { value: "დისკები", label: "დისკები" },
+            { value: "სათადარიგო საბურავი", label: "სათადარიგო საბურავი" },
+            { value: "სსმპ ადაპტირებული", label: "სსმპ ადაპტირებული" },
+          ]}
+          type="multiple"
         />
       </div>
     </div>

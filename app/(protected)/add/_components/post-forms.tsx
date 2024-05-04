@@ -63,6 +63,10 @@ export const formSchema = z.object({
   color: z.string().min(1, { message: "შეავსეთ ველი" }),
   interiorMaterial: InteriorMaterialType,
   interiorMaterialColor: z.string().min(1, { message: "შეავსეთ ველი" }),
+  additionalParameters: z.string().array().optional(),
+  description: z.string().min(1, "შეავსეთ ველი").max(4000, {
+    message: "აღწერა უნდა შედგებოდეს 4000-ზე ნაკლები სიმბოლოსგან",
+  }),
 });
 
 export const PostForms = () => {
@@ -92,6 +96,8 @@ export const PostForms = () => {
       color: "",
       interiorMaterial: undefined,
       interiorMaterialColor: "",
+      additionalParameters: [],
+      description: "",
     },
   });
 
@@ -100,6 +106,7 @@ export const PostForms = () => {
     control,
     formState: { errors },
   } = form;
+
   console.log(errors);
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submit", values);

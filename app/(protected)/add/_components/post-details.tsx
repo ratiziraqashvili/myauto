@@ -49,12 +49,11 @@ export const PostDetails = () => {
             ძირითადი მახასიათებლები
           </span>
         </div>
-        
         <ArrowButton isExpanded={isExpanded} />
       </FormContainer>
       <FormContainer
         className={cn(
-          "w-full lg:w-[24%] px-11 lg:px-3 py-6 lg:flex flex-col",
+          "w-full lg:w-[24%] px-11 lg:px-3 py-6 lg:flex flex-col h-full",
           isExpanded ? "flex" : "hidden lg:flex"
         )}
       >
