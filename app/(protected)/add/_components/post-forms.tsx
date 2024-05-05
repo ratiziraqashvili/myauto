@@ -7,7 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { MainFeatures } from "./main-features";
-import { useEffect } from "react";
+import { PostDetails } from "./post-details";
+import { useState } from "react";
 
 const VehicleType = z.enum(["Car", "SpecialVehicle", "Motorcycle"]);
 const RentingType = z.enum(["ForSale", "ForRent"]);
@@ -71,6 +72,8 @@ export const formSchema = z.object({
 });
 
 export const PostForms = () => {
+  const [isMainFeaturesFormValid, setIsMainFeaturesFormValid] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -113,15 +116,18 @@ export const PostForms = () => {
   }
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex-1 flex flex-col gap-4"
-      >
-        <FormHeader control={control} />
-        <MainFeatures errors={errors} control={control} />
-        <button type="submit">submit</button>
-      </form>
-    </Form>
+    <>
+      <PostDetails />
+      <Form {...form}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex-1 flex flex-col gap-4"
+        >
+          <FormHeader control={control} />
+          <MainFeatures errors={errors} control={control} />
+          <button type="submit">submit</button>
+        </form>
+      </Form>
+    </>
   );
 };

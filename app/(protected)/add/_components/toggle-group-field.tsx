@@ -30,29 +30,6 @@ export const ToggleGroupField = <Schema extends z.ZodType<any, any>>({
   options,
   type,
 }: ToggleGroupFieldProps<Schema>) => {
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
-
-  const onChange = (
-    field: ControllerRenderProps<z.TypeOf<Schema>, any>,
-    value: string[]
-  ) => {
-    if (value.length === 0) {
-      field.onChange([]);
-      setSelectedValues([]);
-      return;
-    }
-
-    if (selectedValues.some((selected) => value.includes(selected))) {
-      const filteredValues = selectedValues.filter((v) => !value.includes(v));
-      field.onChange(filteredValues);
-      setSelectedValues(filteredValues);
-    } else {
-      const combinedValues = [...selectedValues, ...value];
-      field.onChange(combinedValues);
-      setSelectedValues(combinedValues);
-    }
-  };
-
   if (type === "multiple") {
     return (
       <Controller
@@ -69,7 +46,7 @@ export const ToggleGroupField = <Schema extends z.ZodType<any, any>>({
             <FormControl>
               <ToggleGroup
                 value={field.value}
-                onValueChange={(value) => onChange(field, value)}
+                onValueChange={(value) => field.onChange(value)}
                 className="flex gap-x-4 gap-y-2 flex-wrap pt-2"
                 type="multiple"
               >
