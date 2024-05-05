@@ -60,7 +60,6 @@ export const MainFeatures = ({ control, errors }: MainFeaturesProps) => {
   };
 
   const onExpand = () => {
-    console.log("buttont clicked")
     setIsExpanded((prev) => !prev);
   };
 

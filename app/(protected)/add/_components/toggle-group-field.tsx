@@ -53,8 +53,6 @@ export const ToggleGroupField = <Schema extends z.ZodType<any, any>>({
     }
   };
 
-  console.log(selectedValues)
-
   if (type === "multiple") {
     return (
       <Controller

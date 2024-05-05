@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { MainFeatures } from "./main-features";
+import { useEffect } from "react";
 
 const VehicleType = z.enum(["Car", "SpecialVehicle", "Motorcycle"]);
 const RentingType = z.enum(["ForSale", "ForRent"]);
@@ -104,10 +105,9 @@ export const PostForms = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = form;
 
-  console.log(errors);
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submit", values);
   }
