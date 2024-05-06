@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { locations } from "@/constants/locations";
+import { Switch } from "@/components/ui/switch";
 
 interface LocationAndCustomsClearanceProps {
   control: Control<z.infer<typeof formSchema>>;
@@ -27,10 +28,13 @@ export const LocationAndCustomsClearance = ({
   errors,
 }: LocationAndCustomsClearanceProps) => {
   const [isExpanded, setIsExpanded] = useState(true);
+  const [location, setLocation] = useState("");
 
   const onExpand = () => {
     setIsExpanded((prev) => !prev);
   };
+
+  const isLocation = location.length > 0;
 
   return (
     <FormContainer>
@@ -39,7 +43,7 @@ export const LocationAndCustomsClearance = ({
         <ArrowButton onClick={onExpand} isExpanded={isExpanded} />
       </div>
       {isExpanded && (
-        <div className="flex flex-col gap-5 px-6 py-6">
+        <div className="flex flex-col gap-7 px-6 py-6">
           <Controller
             control={control}
             name="location"
@@ -47,7 +51,10 @@ export const LocationAndCustomsClearance = ({
               <FormItem>
                 <FormControl>
                   <Select
-                    onValueChange={(value) => field.onChange(value)}
+                    onValueChange={(value) => {
+                      field.onChange(value);
+                      setLocation(value);
+                    }}
                   >
                     <SelectTrigger
                       className={cn(
@@ -77,7 +84,28 @@ export const LocationAndCustomsClearance = ({
           <Controller
             control={control}
             name="customsClearance"
-           />
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <div>
+                    <Switch
+                      disabled={!isLocation}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                    <span
+                      className={cn(
+                        "ml-2 text-gray-600 text-sm",
+                        !isLocation && "text-gray-300 text-sm ml-2"
+                      )}
+                    >
+                      განბაჟებული
+                    </span>
+                  </div>
+                </FormControl>
+              </FormItem>
+            )}
+          />
         </div>
       )}
     </FormContainer>
