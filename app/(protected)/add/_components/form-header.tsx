@@ -1,7 +1,12 @@
 import FormContainer from "@/components/form-container";
 import { Button } from "@/components/ui/button";
 import { Bike, Car, Tractor } from "lucide-react";
-import { Control, Controller } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  UseFormReset,
+  UseFormSetValue,
+} from "react-hook-form";
 import { z } from "zod";
 import { SelectedOptionType, formSchema } from "./post-forms";
 import { cn } from "@/lib/utils";
@@ -11,12 +16,14 @@ interface FormHeaderProps {
   control: Control<z.infer<typeof formSchema>>;
   selectedOption: string;
   setSelectedOption: (value: SelectedOptionType) => void;
+  reset: UseFormReset<z.infer<typeof formSchema>>;
 }
 
 export const FormHeader = ({
   control,
   selectedOption,
   setSelectedOption,
+  reset,
 }: FormHeaderProps) => {
   const buttons = [
     {
@@ -41,6 +48,13 @@ export const FormHeader = ({
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
+    reset({
+      category: "",
+      manufacturer: "",
+      model: "",
+      customModel: "",
+      engineCapacity: "",
+    });
     setSelectedOption(value);
   };
 

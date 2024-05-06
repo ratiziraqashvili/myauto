@@ -112,6 +112,8 @@ export const PostForms = () => {
     handleSubmit,
     control,
     formState: { errors },
+    setValue,
+    reset
   } = form;
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -126,7 +128,7 @@ export const PostForms = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex-1 flex flex-col gap-4"
         >
-          <FormHeader selectedOption={selectedOption} setSelectedOption={setSelectedOption} control={control} />
+          <FormHeader reset={reset} selectedOption={selectedOption} setSelectedOption={setSelectedOption} control={control} />
           <MainFeatures selectedOption={selectedOption} errors={errors} control={control} />
           <button type="submit">submit</button>
         </form>
