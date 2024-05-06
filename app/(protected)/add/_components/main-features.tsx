@@ -12,11 +12,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { carBrands, motorcycleBrands, specVehicleBrands } from "@/constants/car-brands";
+import {
+  carBrands,
+  motorcycleBrands,
+  specVehicleBrands,
+} from "@/constants/car-brands";
 import { useEffect, useState } from "react";
 import { FormControl, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { carCategories, motorcycleCategories, specVehicleCategories } from "@/constants/categories";
+import {
+  carCategories,
+  motorcycleCategories,
+  specVehicleCategories,
+} from "@/constants/categories";
 import { getYears } from "@/constants/years";
 import { months } from "@/constants/months";
 import { getNumberOfCylinders } from "@/constants/number-of-cylinders";
@@ -194,7 +202,7 @@ export const MainFeatures = ({
                         <SelectValue placeholder="კატეგორია" />
                       </SelectTrigger>
                       <SelectContent>
-                        {carCategories.map((category) => (
+                        {categories.map((category) => (
                           <SelectItem key={category} value={category}>
                             {category}
                           </SelectItem>
@@ -438,7 +446,7 @@ export const MainFeatures = ({
               )}
             />
           </div>
-          <SecondPartOfMainFeatures errors={errors} control={control} />
+          <SecondPartOfMainFeatures selectedOption={selectedOption} errors={errors} control={control} />
           <CarDescriptionField errors={errors} control={control} />
         </>
       )}
