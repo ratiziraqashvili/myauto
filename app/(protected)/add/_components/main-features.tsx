@@ -28,7 +28,10 @@ import {
 import { getYears } from "@/constants/years";
 import { months } from "@/constants/months";
 import { getNumberOfCylinders } from "@/constants/number-of-cylinders";
-import { getEngineCapacity } from "@/constants/engine-capacity";
+import {
+  getEngineCapacity,
+  motorCycleEngineCapacity,
+} from "@/constants/engine-capacity";
 import { Switch } from "@/components/ui/switch";
 import { SecondPartOfMainFeatures } from "./second-part-of-main-features";
 import { cn } from "@/lib/utils";
@@ -58,19 +61,22 @@ export const MainFeatures = ({
 
   const years = getYears();
   const numberOfCylinders = getNumberOfCylinders();
-  const engineCapacity = getEngineCapacity();
+  let engineCapacity: string[];
   let brands: string[];
   let categories: string[];
 
   if (selectedOption === "Car") {
     brands = carBrands;
     categories = carCategories;
+    engineCapacity = getEngineCapacity();
   } else if (selectedOption === "SpecialVehicle") {
     brands = specVehicleBrands;
     categories = specVehicleCategories;
+    engineCapacity = getEngineCapacity();
   } else {
     brands = motorcycleBrands;
     categories = motorcycleCategories;
+    engineCapacity = motorCycleEngineCapacity;
   }
 
   const fetchModels = async (make: string) => {
@@ -446,7 +452,11 @@ export const MainFeatures = ({
               )}
             />
           </div>
-          <SecondPartOfMainFeatures selectedOption={selectedOption} errors={errors} control={control} />
+          <SecondPartOfMainFeatures
+            selectedOption={selectedOption}
+            errors={errors}
+            control={control}
+          />
           <CarDescriptionField errors={errors} control={control} />
         </>
       )}

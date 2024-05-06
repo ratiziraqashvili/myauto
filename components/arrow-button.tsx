@@ -11,11 +11,9 @@ export const ArrowButton = ({
 }) => {
   return (
     <Button
-      onClick={(e) => {
-        onClick?.();
-        e.preventDefault();
-      }}
+      onClick={onClick}
       variant="ghost"
+      type="button"
       className="rounded-full transition duration-300 p-1 h-6"
     >
       <ChevronDown
