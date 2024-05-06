@@ -9,6 +9,7 @@ import * as z from "zod";
 import { MainFeatures } from "./main-features";
 import { PostDetails } from "./post-details";
 import { useState } from "react";
+import { LocationAndCustomsClearance } from "./location-and-customs-clearance";
 
 const VehicleType = z.enum(["Car", "SpecialVehicle", "Motorcycle"]);
 const RentingType = z.enum(["ForSale", "ForRent"]);
@@ -69,7 +70,8 @@ export const formSchema = z.object({
   description: z.string().min(1, "შეავსეთ ველი").max(4000, {
     message: "აღწერა უნდა შედგებოდეს 4000-ზე ნაკლები სიმბოლოსგან",
   }),
-  location: z.string().min(1, "შეავსეთ ველი")
+  location: z.string().min(1, "შეავსეთ ველი"),
+  customsClearance: z.boolean(),
 });
 
 export type SelectedOptionType = "Car" | "SpecialVehicle" | "Motorcycle";
@@ -107,6 +109,7 @@ export const PostForms = () => {
       additionalParameters: [],
       description: "",
       location: "",
+      customsClearance: false,
     },
   });
 
@@ -131,6 +134,7 @@ export const PostForms = () => {
         >
           <FormHeader reset={reset} selectedOption={selectedOption} setSelectedOption={setSelectedOption} control={control} />
           <MainFeatures selectedOption={selectedOption} errors={errors} control={control} />
+          <LocationAndCustomsClearance control={control} errors={errors} />
           <button type="submit">submit</button>
         </form>
       </Form>
