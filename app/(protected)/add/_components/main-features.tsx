@@ -1,10 +1,10 @@
+import * as z from "zod";
 import FormContainer from "@/components/form-container";
 import { FormHeading } from "./form-heading";
 import { TableProperties } from "lucide-react";
 import { ArrowButton } from "@/components/arrow-button";
 import { Control, Controller } from "react-hook-form";
-import * as z from "zod";
-import { formSchema } from "./post-forms";
+import { SelectedOptionType, formSchema } from "./post-forms";
 import {
   Select,
   SelectContent,
@@ -12,11 +12,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { carBrandsArray } from "@/constants/car-brands";
+import { carBrands, motorcycleBrands, specVehicleBrands } from "@/constants/car-brands";
 import { useEffect, useState } from "react";
 import { FormControl, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { categories } from "@/constants/categories";
+import { carCategories, motorcycleCategories, specVehicleCategories } from "@/constants/categories";
 import { getYears } from "@/constants/years";
 import { months } from "@/constants/months";
 import { getNumberOfCylinders } from "@/constants/number-of-cylinders";
@@ -29,6 +29,7 @@ import { CarDescriptionField } from "./car-description-field";
 interface MainFeaturesProps {
   control: Control<z.infer<typeof formSchema>>;
   errors: any;
+  selectedOption: SelectedOptionType;
 }
 
 interface ModelType {
@@ -38,7 +39,11 @@ interface ModelType {
   Model_Name: string;
 }
 
-export const MainFeatures = ({ control, errors }: MainFeaturesProps) => {
+export const MainFeatures = ({
+  control,
+  errors,
+  selectedOption,
+}: MainFeaturesProps) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [brand, setBrand] = useState("");
   const [models, setModels] = useState<ModelType[] | never>([]);
@@ -46,6 +51,19 @@ export const MainFeatures = ({ control, errors }: MainFeaturesProps) => {
   const years = getYears();
   const numberOfCylinders = getNumberOfCylinders();
   const engineCapacity = getEngineCapacity();
+  let brands: string[];
+  let categories: string[];
+
+  if (selectedOption === "Car") {
+    brands = carBrands;
+    categories = carCategories;
+  } else if (selectedOption === "SpecialVehicle") {
+    brands = specVehicleBrands;
+    categories = specVehicleCategories;
+  } else {
+    brands = motorcycleBrands;
+    categories = motorcycleCategories;
+  }
 
   const fetchModels = async (make: string) => {
     const response = await fetch(
@@ -103,7 +121,7 @@ export const MainFeatures = ({ control, errors }: MainFeaturesProps) => {
                         <SelectValue placeholder="მწარმოებელი" />
                       </SelectTrigger>
                       <SelectContent>
-                        {carBrandsArray.map((brand) => (
+                        {brands.map((brand) => (
                           <SelectItem key={brand} value={brand}>
                             {brand}
                           </SelectItem>
@@ -176,7 +194,7 @@ export const MainFeatures = ({ control, errors }: MainFeaturesProps) => {
                         <SelectValue placeholder="კატეგორია" />
                       </SelectTrigger>
                       <SelectContent>
-                        {categories.map((category) => (
+                        {carCategories.map((category) => (
                           <SelectItem key={category} value={category}>
                             {category}
                           </SelectItem>

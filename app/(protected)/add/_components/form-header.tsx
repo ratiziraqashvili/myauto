@@ -3,18 +3,21 @@ import { Button } from "@/components/ui/button";
 import { Bike, Car, Tractor } from "lucide-react";
 import { Control, Controller } from "react-hook-form";
 import { z } from "zod";
-import { formSchema } from "./post-forms";
-import { useState } from "react";
+import { SelectedOptionType, formSchema } from "./post-forms";
 import { cn } from "@/lib/utils";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 interface FormHeaderProps {
   control: Control<z.infer<typeof formSchema>>;
+  selectedOption: string;
+  setSelectedOption: (value: SelectedOptionType) => void;
 }
 
-export const FormHeader = ({ control }: FormHeaderProps) => {
-  const [selectedOption, setSelectedOption] = useState<string>("Car");
-
+export const FormHeader = ({
+  control,
+  selectedOption,
+  setSelectedOption,
+}: FormHeaderProps) => {
   const buttons = [
     {
       icon: Car,
@@ -33,7 +36,10 @@ export const FormHeader = ({ control }: FormHeaderProps) => {
     },
   ];
 
-  const onButtonClick = (value: string, e: any) => {
+  const onButtonClick = (
+    value: SelectedOptionType,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     setSelectedOption(value);
   };
@@ -55,7 +61,7 @@ export const FormHeader = ({ control }: FormHeaderProps) => {
                 key={button.label}
                 variant="ghost"
                 onClick={(e) => {
-                  onButtonClick(button.value, e);
+                  onButtonClick(button.value as SelectedOptionType, e);
                   field.onChange(button.value);
                 }}
               >

@@ -71,8 +71,11 @@ export const formSchema = z.object({
   }),
 });
 
+export type SelectedOptionType = "Car" | "SpecialVehicle" | "Motorcycle";
+
 export const PostForms = () => {
   const [isMainFeaturesFormValid, setIsMainFeaturesFormValid] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<SelectedOptionType>("Car");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -108,7 +111,7 @@ export const PostForms = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors, isValid },
+    formState: { errors },
   } = form;
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -123,8 +126,8 @@ export const PostForms = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex-1 flex flex-col gap-4"
         >
-          <FormHeader control={control} />
-          <MainFeatures errors={errors} control={control} />
+          <FormHeader selectedOption={selectedOption} setSelectedOption={setSelectedOption} control={control} />
+          <MainFeatures selectedOption={selectedOption} errors={errors} control={control} />
           <button type="submit">submit</button>
         </form>
       </Form>
