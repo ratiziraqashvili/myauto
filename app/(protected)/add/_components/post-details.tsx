@@ -53,7 +53,7 @@ export const PostDetails = () => {
       </FormContainer>
       <FormContainer
         className={cn(
-          "w-full lg:w-[24%] px-11 lg:px-3 py-6 lg:flex flex-col h-full",
+          "w-full lg:w-[24%] px-11 lg:px-3 py-6 lg:flex flex-col h-full sticky top-[4.5rem]",
           isExpanded ? "flex" : "hidden lg:flex"
         )}
       >

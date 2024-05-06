@@ -69,6 +69,7 @@ export const formSchema = z.object({
   description: z.string().min(1, "შეავსეთ ველი").max(4000, {
     message: "აღწერა უნდა შედგებოდეს 4000-ზე ნაკლები სიმბოლოსგან",
   }),
+  location: z.string().min(1, "შეავსეთ ველი")
 });
 
 export type SelectedOptionType = "Car" | "SpecialVehicle" | "Motorcycle";
@@ -105,6 +106,7 @@ export const PostForms = () => {
       interiorMaterialColor: "",
       additionalParameters: [],
       description: "",
+      location: "",
     },
   });
 
@@ -112,7 +114,6 @@ export const PostForms = () => {
     handleSubmit,
     control,
     formState: { errors },
-    setValue,
     reset
   } = form;
 
