@@ -74,7 +74,10 @@ export const formSchema = z.object({
   location: z.string().min(1, "შეავსეთ ველი"),
   customsClearance: z.boolean(),
   techView: z.boolean(),
-  images: z.object({ url: z.string() }).array(),
+  images: z
+    .object({ url: z.string() })
+    .array()
+    .min(1, "ატვირთეთ მინიმუმ 1 ფოტო"),
 });
 
 export type SelectedOptionType = "Car" | "SpecialVehicle" | "Motorcycle";
@@ -115,7 +118,7 @@ export const PostForms = () => {
       location: "",
       customsClearance: false,
       techView: false,
-      images: []
+      images: [],
     },
   });
 
@@ -125,6 +128,8 @@ export const PostForms = () => {
     formState: { errors },
     reset,
   } = form;
+
+  console.log(errors);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log("submit", values);
