@@ -74,6 +74,7 @@ export const formSchema = z.object({
   location: z.string().min(1, "შეავსეთ ველი"),
   customsClearance: z.boolean(),
   techView: z.boolean(),
+  images: z.object({ url: z.string() }).array(),
 });
 
 export type SelectedOptionType = "Car" | "SpecialVehicle" | "Motorcycle";
@@ -114,6 +115,7 @@ export const PostForms = () => {
       location: "",
       customsClearance: false,
       techView: false,
+      images: []
     },
   });
 
