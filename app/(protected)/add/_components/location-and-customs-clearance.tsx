@@ -96,10 +96,37 @@ export const LocationAndCustomsClearance = ({
                     <span
                       className={cn(
                         "ml-2 text-gray-600 text-sm",
-                        !isLocation && "text-gray-300 text-sm ml-2"
+                        !isLocation &&
+                          "text-gray-300 text-sm ml-2 cursor-not-allowed"
                       )}
                     >
                       განბაჟებული
+                    </span>
+                  </div>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <Controller
+            control={control}
+            name="techView"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <div>
+                    <Switch
+                      disabled={!isLocation}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                    <span
+                      className={cn(
+                        "ml-2 text-gray-600 text-sm",
+                        !isLocation &&
+                          "text-gray-300 text-sm ml-2 cursor-not-allowed"
+                      )}
+                    >
+                      ტექ. დათვალიერება
                     </span>
                   </div>
                 </FormControl>
