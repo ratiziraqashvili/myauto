@@ -28,16 +28,17 @@ const ImageUpload = ({
   if (!isMounted) return null;
 
   const onUpload = (result: any) => {
+    console.log(result);
     onChange(result.info.secure_url);
   };
 
   return (
     <div>
-      <div>
+      <div className="pb-5 flex gap-2 overflow-auto">
         {value.map((url) => (
           <div
             key={url}
-            className="relative w-[200px] h-[200px] rounded-md overflow-hidden"
+            className="relative rounded-md w-[200px] overflow-hidden flex gap-3"
           >
             <div className="z-10 absolute top-2 right-2">
               <Button
@@ -49,7 +50,14 @@ const ImageUpload = ({
                 <X className="size-4" />
               </Button>
             </div>
-            <CldImage fill className="object-cover" alt="Image" src={url} />
+            <CldImage
+              crop="fill"
+              width={200}
+              height={200}
+              className="object-cover"
+              alt="Image"
+              src={url}
+            />
           </div>
         ))}
       </div>
@@ -63,7 +71,7 @@ const ImageUpload = ({
             <div
               onClick={onClick}
               className={cn(
-                "w-full flex gap-2 items-center py-8 px-6 border border-dashed border-emerald-500 bg-emerald-100 rounded-xl",
+                "w-full flex gap-2 items-center py-8 px-6 border border-dashed border-emerald-500 bg-emerald-100 rounded-xl cursor-pointer",
                 isError && "border-red-500 bg-red-100"
               )}
             >
