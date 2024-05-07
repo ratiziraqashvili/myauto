@@ -36,6 +36,7 @@ import { Switch } from "@/components/ui/switch";
 import { SecondPartOfMainFeatures } from "./second-part-of-main-features";
 import { cn } from "@/lib/utils";
 import { CarDescriptionField } from "./car-description-field";
+import { FormHeadingContainer } from "./form-heading-container";
 
 interface MainFeaturesProps {
   control: Control<z.infer<typeof formSchema>>;
@@ -107,10 +108,10 @@ export const MainFeatures = ({
 
   return (
     <FormContainer>
-      <div className="border-b flex justify-between px-6 py-5">
+      <FormHeadingContainer>
         <FormHeading icon={TableProperties} label="ძირითადი მახასიათებლები" />
         <ArrowButton onClick={onExpand} isExpanded={isExpanded} />
-      </div>
+      </FormHeadingContainer>
       {isExpanded && (
         <>
           <div className="px-6 py-6 grid lg:grid-cols-[1.5fr_1fr_0.7fr] lg:grid-rows-4 grid-rows-1 gap-3 md:gap-7 border-b">

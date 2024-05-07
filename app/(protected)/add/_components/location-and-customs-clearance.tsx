@@ -17,6 +17,7 @@ import {
 import { cn } from "@/lib/utils";
 import { locations } from "@/constants/locations";
 import { Switch } from "@/components/ui/switch";
+import { FormHeadingContainer } from "./form-heading-container";
 
 interface LocationAndCustomsClearanceProps {
   control: Control<z.infer<typeof formSchema>>;
@@ -38,10 +39,10 @@ export const LocationAndCustomsClearance = ({
 
   return (
     <FormContainer>
-      <div className="border-b flex justify-between px-6 py-5">
+      <FormHeadingContainer>
         <FormHeading icon={MapPin} label="მდებარეობა და განბაჟება" />
         <ArrowButton onClick={onExpand} isExpanded={isExpanded} />
-      </div>
+      </FormHeadingContainer>
       {isExpanded && (
         <div className="flex flex-col gap-7 px-6 py-6">
           <Controller

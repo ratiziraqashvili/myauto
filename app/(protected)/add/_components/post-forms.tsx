@@ -10,6 +10,7 @@ import { MainFeatures } from "./main-features";
 import { PostDetails } from "./post-details";
 import { useState } from "react";
 import { LocationAndCustomsClearance } from "./location-and-customs-clearance";
+import { ImageAndVideo } from "./image-and-video";
 
 const VehicleType = z.enum(["Car", "SpecialVehicle", "Motorcycle"]);
 const RentingType = z.enum(["ForSale", "ForRent"]);
@@ -147,6 +148,7 @@ export const PostForms = () => {
             control={control}
           />
           <LocationAndCustomsClearance control={control} errors={errors} />
+          <ImageAndVideo control={control} errors={errors} />
           <button type="submit">submit</button>
         </form>
       </Form>
