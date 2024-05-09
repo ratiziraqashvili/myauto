@@ -4,11 +4,11 @@ import { Navbar } from "@/components/navbar";
 
 const PageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Container>
+    <div>
       <Navbar />
       <div className="bg-[#f2f3f6] h-full pt-[4.5rem]">{children}</div>
-      <MobileBottomNavbar />
-    </Container>
+      <MobileBottomNavbar className="max-w-[100rem]" />
+    </div>
   );
 };
 

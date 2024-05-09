@@ -23,6 +23,9 @@ interface ImageAndVideoProps {
 
 export const ImageAndVideo = ({ control, errors }: ImageAndVideoProps) => {
   const [isExpanded, setIsExpanded] = useState(true);
+  const [uploadedImagesCount, setUploadedImagesCount] = useState<number>(0);
+
+  console.log(uploadedImagesCount)
 
   const onExpand = () => {
     setIsExpanded((prev) => !prev);
@@ -49,6 +52,8 @@ export const ImageAndVideo = ({ control, errors }: ImageAndVideoProps) => {
                 </FormMessage>
                 <FormControl>
                   <ImageUpload
+                    uploadedImagesCount={uploadedImagesCount}
+                    setUploadedImagesCount={setUploadedImagesCount}
                     isError={!!errors.images?.message}
                     value={field.value.map((image) => image.url)}
                     onChange={(url) =>

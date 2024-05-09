@@ -8,7 +8,7 @@ import { LoginButton } from "./auth/login-button";
 import { useSession } from "next-auth/react";
 import { ProfilePicture } from "./profile-picture";
 
-export const MobileBottomNavbar = () => {
+export const MobileBottomNavbar = ({ className }: { className: string }) => {
   const { status } = useSession();
   const pathname = usePathname();
 
@@ -38,7 +38,12 @@ export const MobileBottomNavbar = () => {
   ];
 
   return (
-    <div className="w-full flex justify-center fixed bottom-0 z-50 bg-white py-2 md:hidden">
+    <div
+      className={cn(
+        "w-full flex justify-center fixed bottom-0 z-50 bg-white py-2 md:hidden",
+        className
+      )}
+    >
       <div className="flex w-[100%]">
         {routes.map((route, index) => (
           <div
@@ -72,7 +77,7 @@ export const MobileBottomNavbar = () => {
                     strokeWidth={1.7}
                     className={cn(
                       "text-gray-800",
-                      pathname === route.href && "text-orange-600",
+                      pathname === route.href && "text-orange-600"
                     )}
                   />
                   <span className="text-muted-foreground text-[0.7rem]">
