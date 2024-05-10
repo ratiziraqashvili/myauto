@@ -1,4 +1,4 @@
-import { Control, Controller } from "react-hook-form";
+import { Control, Controller, useWatch } from "react-hook-form";
 import { formSchema } from "./post-forms";
 import * as z from "zod";
 import FormContainer from "@/components/form-container";
@@ -19,6 +19,7 @@ interface PriceProps {
 
 export const Price = ({ control, errors }: PriceProps) => {
   const [isExpanded, setIsExpanded] = useState(true);
+  const priceWithDeal = useWatch({ control, name: "priceWithDeal" });
 
   const onExpand = () => {
     setIsExpanded((prev) => !prev);
@@ -31,8 +32,8 @@ export const Price = ({ control, errors }: PriceProps) => {
         <ArrowButton onClick={onExpand} isExpanded={isExpanded} />
       </FormHeadingContainer>
       {isExpanded && (
-        <div className="p-6 flex flex-col gap-7">
-          <div className="flex">
+        <div className="flex flex-col">
+          <div className="flex p-6 pb-2">
             <Controller
               control={control}
               name="price"
@@ -47,6 +48,8 @@ export const Price = ({ control, errors }: PriceProps) => {
                       {...field}
                       className="py-7 rounded-r-none w-[15rem]"
                       placeholder="ჩაწერე ფასი"
+                      disabled={priceWithDeal}
+                      value={priceWithDeal ? "" : field.value}
                     />
                   </FormControl>
                 </FormItem>
@@ -63,6 +66,7 @@ export const Price = ({ control, errors }: PriceProps) => {
                       onValueChange={(value) => field.onChange(value)}
                       type="single"
                       className="py-[0.62rem] px-3 border rounded-r"
+                      disabled={priceWithDeal}
                     >
                       <ToggleGroupItem
                         className="data-[state=on]:bg-gray-200 rounded-full font-bold opacity-20 data-[state=on]:opacity-100 transition"
@@ -88,7 +92,7 @@ export const Price = ({ control, errors }: PriceProps) => {
             control={control}
             name="priceWithDeal"
             render={({ field }) => (
-              <FormItem className="pb-4">
+              <FormItem className="border-b p-6">
                 <FormControl>
                   <div>
                     <Switch
@@ -103,10 +107,25 @@ export const Price = ({ control, errors }: PriceProps) => {
               </FormItem>
             )}
           />
-          {/* <Controller
-           control={control}
-           name=""
-           /> */}
+          <Controller
+            control={control}
+            name="carExchange"
+            render={({ field }) => (
+              <FormItem className="p-6">
+                <FormControl>
+                  <div>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                    <span className="ml-2 text-gray-600 text-sm">
+                      სხვა ავტომობილში გაცვლა
+                    </span>
+                  </div>
+                </FormControl>
+              </FormItem>
+            )}
+          />
         </div>
       )}
     </FormContainer>

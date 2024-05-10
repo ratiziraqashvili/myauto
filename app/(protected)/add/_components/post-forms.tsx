@@ -129,7 +129,7 @@ export const PostForms = () => {
       images: [],
       video: "",
       price: "",
-      currency: undefined,
+      currency: "GEL",
       priceWithDeal: false,
       carExchange: false,
     },
