@@ -10,6 +10,7 @@ import { useState } from "react";
 import { FormControl, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Switch } from "@/components/ui/switch";
 
 interface PriceProps {
   control: Control<z.infer<typeof formSchema>>;
@@ -26,11 +27,11 @@ export const Price = ({ control, errors }: PriceProps) => {
   return (
     <FormContainer>
       <FormHeadingContainer>
-        <FormHeading icon={CircleDollarSign} label="ფოტო და ვიდეო" />
+        <FormHeading icon={CircleDollarSign} label="ფასი" />
         <ArrowButton onClick={onExpand} isExpanded={isExpanded} />
       </FormHeadingContainer>
       {isExpanded && (
-        <div className="p-6 flex flex-col gap-3">
+        <div className="p-6 flex flex-col gap-7">
           <div className="flex">
             <Controller
               control={control}
@@ -83,6 +84,29 @@ export const Price = ({ control, errors }: PriceProps) => {
               )}
             />
           </div>
+          <Controller
+            control={control}
+            name="priceWithDeal"
+            render={({ field }) => (
+              <FormItem className="pb-4">
+                <FormControl>
+                  <div>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                    <span className="ml-2 text-gray-600 text-sm">
+                      ფასი შეთანხმებით
+                    </span>
+                  </div>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          {/* <Controller
+           control={control}
+           name=""
+           /> */}
         </div>
       )}
     </FormContainer>

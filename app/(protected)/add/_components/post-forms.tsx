@@ -85,6 +85,7 @@ export const formSchema = z.object({
   price: z.string().min(1, "შეავსეთ ველი"),
   currency: CurrencyType,
   priceWithDeal: z.boolean(),
+  carExchange: z.boolean(),
 });
 
 export type SelectedOptionType = "Car" | "SpecialVehicle" | "Motorcycle";
@@ -130,6 +131,7 @@ export const PostForms = () => {
       price: "",
       currency: undefined,
       priceWithDeal: false,
+      carExchange: false,
     },
   });
 
