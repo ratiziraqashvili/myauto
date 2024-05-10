@@ -13,6 +13,7 @@ interface ImageUploadProps {
   value: string[];
   isError?: boolean;
   setUploadedImagesCount: (value: number) => void;
+  uploadedImagesCount: number;
 }
 
 const ImageUpload = ({
@@ -21,6 +22,7 @@ const ImageUpload = ({
   value,
   isError,
   setUploadedImagesCount,
+  uploadedImagesCount,
 }: ImageUploadProps) => {
   const [isMounted, setIsMounted] = useState(false);
   const { toast } = useToast();
@@ -51,7 +53,7 @@ const ImageUpload = ({
   };
 
   return (
-    <div>
+    <div className={cn("", uploadedImagesCount > 0 && "flex gap-x-2 flex-wrap")}>
       <div className="pb-5 gap-3 overflow-auto flex">
         {value.map((url) => (
           <div
@@ -91,6 +93,20 @@ const ImageUpload = ({
           const onClick = () => {
             open();
           };
+
+          if (uploadedImagesCount > 0) {
+            return (
+              <div
+                onClick={onClick}
+                className="h-[100px] w-[100px] border border-dashed border-emerald-500 bg-emerald-100 rounded-xl cursor-pointer flex flex-col items-center justify-center gap-[0.5rem]"
+              >
+                <Camera className="text-emerald-500 size-7" />
+                <span className="text-emerald-500 font-semibold text-[0.68rem] text-center">
+                  ატვირთე ფოტოსურათები
+                </span>
+              </div>
+            );
+          }
 
           return (
             <div

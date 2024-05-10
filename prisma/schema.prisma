@@ -86,6 +86,11 @@ enum InteriorMaterialType {
   ArtificialLeather
 }
 
+enum CurrencyType {
+  GEL
+  USD
+}
+
 model Vehicle {
   id                    String               @id @default(cuid())
   userId                String
@@ -121,8 +126,9 @@ model Vehicle {
   customsClearance      Boolean
   techView              Boolean
   images                Image[]
-  video                 String
+  video                 String               @db.Text
   price                 String
+  currency              CurrencyType
   priceWithDeal         Boolean
   carExchange           Boolean
 

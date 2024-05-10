@@ -11,6 +11,7 @@ import { PostDetails } from "./post-details";
 import { useState } from "react";
 import { LocationAndCustomsClearance } from "./location-and-customs-clearance";
 import { ImageAndVideo } from "./image-and-video";
+import { Price } from "./price";
 
 const VehicleType = z.enum(["Car", "SpecialVehicle", "Motorcycle"]);
 const RentingType = z.enum(["ForSale", "ForRent"]);
@@ -42,6 +43,7 @@ const DoorsType = z.enum(["Two_Three", "Four_Five", "Greater_Than_Five"], {
 const InteriorMaterialType = z.enum(["Piece", "Leather", "ArtificialLeather"], {
   message: "შეავსე ველი",
 });
+const CurrencyType = z.enum(["GEL", "USD"], { message: "შეავსე ველი" });
 
 export const formSchema = z.object({
   vehicleType: VehicleType,
@@ -77,7 +79,12 @@ export const formSchema = z.object({
   images: z
     .object({ url: z.string() })
     .array()
-    .min(1, "ატვირთეთ მინიმუმ 1 ფოტო"),
+    .min(1, "ატვირთეთ მინიმუმ 1 ფოტო")
+    .max(15, "ატვირთეთ მაქსიმუმ 15 ფოტო"),
+  video: z.string().optional(),
+  price: z.string().min(1, "შეავსეთ ველი"),
+  currency: CurrencyType,
+  priceWithDeal: z.boolean(),
 });
 
 export type SelectedOptionType = "Car" | "SpecialVehicle" | "Motorcycle";
@@ -119,6 +126,10 @@ export const PostForms = () => {
       customsClearance: false,
       techView: false,
       images: [],
+      video: "",
+      price: "",
+      currency: undefined,
+      priceWithDeal: false,
     },
   });
 
@@ -156,6 +167,7 @@ export const PostForms = () => {
           />
           <LocationAndCustomsClearance control={control} errors={errors} />
           <ImageAndVideo control={control} errors={errors} />
+          <Price control={control} errors={errors} />
           <button type="submit">submit</button>
         </form>
       </Form>
