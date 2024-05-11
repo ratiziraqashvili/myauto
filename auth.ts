@@ -7,6 +7,7 @@ import { getUserById } from "./data/user";
 
 export interface CustomUser extends User {
     lastName?: string;
+    phone?: string;
 }
 
 export const {
@@ -27,7 +28,8 @@ export const {
 
             if (!user) return null as any;
 
-            (session.user as CustomUser).lastName = user.lastName
+            (session.user as CustomUser).lastName = user.lastName;
+            (session.user as CustomUser).phone = user.phone!;
 
             return session;
         },

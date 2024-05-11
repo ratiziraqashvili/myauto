@@ -104,6 +104,7 @@ export const PostForms = () => {
   const ownerFullName = sessionUser
     ? `${sessionUser.name} ${sessionUser.lastName}`.toLowerCase()
     : "";
+  const ownerPhoneNumber = sessionUser ? `${sessionUser.phone}` : "";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -157,7 +158,8 @@ export const PostForms = () => {
 
   useEffect(() => {
     setValue("ownerName", ownerFullName);
-  }, [ownerFullName, setValue]);
+    setValue("ownerPhone", ownerPhoneNumber);
+  }, [ownerFullName, ownerPhoneNumber, setValue]);
 
   console.log(errors);
 

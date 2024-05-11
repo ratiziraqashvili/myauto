@@ -6,7 +6,7 @@ import { useState } from "react";
 import { FormHeadingContainer } from "./form-heading-container";
 import { FormHeading } from "./form-heading";
 import { ArrowButton } from "@/components/arrow-button";
-import { CircleUser, Phone } from "lucide-react";
+import { CircleUser, Phone, Smartphone } from "lucide-react";
 import {
   FormControl,
   FormItem,
@@ -69,6 +69,12 @@ export const ContactInfo = ({ control, errors }: ContactInfoProps) => {
                 <FormLabel>
                   <SmallFormHeading label="ტელეფონის ნომერი" />
                 </FormLabel>
+                <FormControl>
+                    <div className="relative">
+                      <Input className="pl-10" {...field} value={field.value} />
+                      <Smartphone className="absolute left-2 top-2" />
+                    </div>
+                  </FormControl>
               </FormItem>
             )}
           />
