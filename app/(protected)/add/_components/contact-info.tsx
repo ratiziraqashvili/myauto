@@ -35,7 +35,7 @@ export const ContactInfo = ({ control, errors }: ContactInfoProps) => {
         <ArrowButton onClick={onExpand} isExpanded={isExpanded} />
       </FormHeadingContainer>
       {isExpanded && (
-        <div className="flex gap-3 p-6">
+        <div className="flex gap-5 p-6">
           <Controller
             control={control}
             name="ownerName"
@@ -67,8 +67,8 @@ export const ContactInfo = ({ control, errors }: ContactInfoProps) => {
                   {errors.ownerPhone?.message as React.ReactNode}
                 </FormMessage>
                 <FormLabel>
-                    <SmallFormHeading label="ტელეფონის ნომერი" />
-                  </FormLabel>
+                  <SmallFormHeading label="ტელეფონის ნომერი" />
+                </FormLabel>
               </FormItem>
             )}
           />
