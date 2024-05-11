@@ -8,10 +8,13 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { MainFeatures } from "./main-features";
 import { PostDetails } from "./post-details";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LocationAndCustomsClearance } from "./location-and-customs-clearance";
 import { ImageAndVideo } from "./image-and-video";
 import { Price } from "./price";
+import { ContactInfo } from "./contact-info";
+import { useSession } from "next-auth/react";
+import { CustomUser } from "@/auth";
 
 const VehicleType = z.enum(["Car", "SpecialVehicle", "Motorcycle"]);
 const RentingType = z.enum(["ForSale", "ForRent"]);
@@ -86,14 +89,21 @@ export const formSchema = z.object({
   currency: CurrencyType,
   priceWithDeal: z.boolean(),
   carExchange: z.boolean(),
+  ownerName: z.string().min(1, "შეავსეთ ველი"),
+  ownerPhone: z.string().min(1, "შეავსეთ ველი"),
 });
 
 export type SelectedOptionType = "Car" | "SpecialVehicle" | "Motorcycle";
 
 export const PostForms = () => {
-  const [isMainFeaturesFormValid, setIsMainFeaturesFormValid] = useState(false);
   const [selectedOption, setSelectedOption] =
     useState<SelectedOptionType>("Car");
+
+  const { data: session } = useSession();
+  const sessionUser = session?.user as CustomUser;
+  const ownerFullName = sessionUser
+    ? `${sessionUser.name} ${sessionUser.lastName}`.toLowerCase()
+    : "";
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -132,6 +142,8 @@ export const PostForms = () => {
       currency: "GEL",
       priceWithDeal: false,
       carExchange: false,
+      ownerName: "",
+      ownerPhone: "",
     },
   });
 
@@ -140,7 +152,12 @@ export const PostForms = () => {
     control,
     formState: { errors },
     reset,
+    setValue,
   } = form;
+
+  useEffect(() => {
+    setValue("ownerName", ownerFullName);
+  }, [ownerFullName, setValue]);
 
   console.log(errors);
 
@@ -170,6 +187,7 @@ export const PostForms = () => {
           <LocationAndCustomsClearance control={control} errors={errors} />
           <ImageAndVideo control={control} errors={errors} />
           <Price control={control} errors={errors} />
+          <ContactInfo control={control} errors={errors} />
           <button type="submit">submit</button>
         </form>
       </Form>

@@ -1,9 +1,13 @@
-import NextAuth, { DefaultSession } from "next-auth";
+import NextAuth, { User } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 
 import authConfig from "./auth.config";
 import { db } from "./lib/db";
 import { getUserById } from "./data/user";
+
+export interface CustomUser extends User {
+    lastName?: string;
+}
 
 export const {
     handlers: { GET, POST },
@@ -22,6 +26,8 @@ export const {
             const user = userId ? await getUserById(userId) : null;
 
             if (!user) return null as any;
+
+            (session.user as CustomUser).lastName = user.lastName
 
             return session;
         },
