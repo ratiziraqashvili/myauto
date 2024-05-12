@@ -1,7 +1,6 @@
 import * as z from "zod";
 import FormContainer from "@/components/form-container";
 import { Control, Controller } from "react-hook-form";
-import { formSchema } from "./post-forms";
 import { FormHeadingContainer } from "./form-heading-container";
 import { FormHeading } from "./form-heading";
 import { Image, Link2 } from "lucide-react";
@@ -16,9 +15,10 @@ import {
 import { SmallFormHeading } from "./small-form-heading";
 import ImageUpload from "@/components/image-upload";
 import { Input } from "@/components/ui/input";
+import { carPostSchema } from "@/schemas";
 
 interface ImageAndVideoProps {
-  control: Control<z.infer<typeof formSchema>>;
+  control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
 }
 

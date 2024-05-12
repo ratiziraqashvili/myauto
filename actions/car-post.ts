@@ -1,14 +1,14 @@
 "use server";
 
 import * as z from "zod";
-import { formSchema } from "@/app/(protected)/add/_components/post-forms";
 import { currentUser } from "@/lib/auth";
 import { getUserById } from "@/data/user";
 import { db } from "@/lib/db";
 import { removeQuotes } from "@/lib/quotes-remover";
+import { carPostSchema } from "@/schemas";
 
-export const carPost = async (values: z.infer<typeof formSchema>) => {
-    const validatedFields = formSchema.safeParse(values);
+export const carPost = async (values: z.infer<typeof carPostSchema>) => {
+    const validatedFields = carPostSchema.safeParse(values);
     const user = await currentUser();
 
     if (!user) {

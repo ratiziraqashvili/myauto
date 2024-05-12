@@ -1,7 +1,6 @@
 import * as z from "zod";
 import FormContainer from "@/components/form-container";
 import { Control, Controller } from "react-hook-form";
-import { formSchema } from "./post-forms";
 import { useState } from "react";
 import { FormHeadingContainer } from "./form-heading-container";
 import { FormHeading } from "./form-heading";
@@ -15,9 +14,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { SmallFormHeading } from "./small-form-heading";
+import { carPostSchema } from "@/schemas";
 
 interface ContactInfoProps {
-  control: Control<z.infer<typeof formSchema>>;
+  control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
 }
 

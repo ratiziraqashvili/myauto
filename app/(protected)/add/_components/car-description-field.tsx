@@ -1,15 +1,15 @@
 import { Textarea } from "@/components/ui/textarea";
 import { Control, Controller } from "react-hook-form";
 import * as z from "zod";
-import { formSchema } from "./post-forms";
 import { FormControl, FormItem, FormMessage } from "@/components/ui/form";
 import { SmallFormHeading } from "./small-form-heading";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import debounce from "lodash.debounce";
+import { carPostSchema } from "@/schemas";
 
 interface CarDescriptionFieldProps {
-  control: Control<z.infer<typeof formSchema>>;
+  control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
 }
 

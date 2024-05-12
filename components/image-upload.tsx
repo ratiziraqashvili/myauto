@@ -47,6 +47,7 @@ const ImageUpload = ({
       toast({
         description: "სურათში ვერ მოიძებნა მანქანა.",
         duration: 3000,
+        variant: "destructive"
       });
     }
   };

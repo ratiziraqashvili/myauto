@@ -4,7 +4,7 @@ import { FormHeading } from "./form-heading";
 import { TableProperties } from "lucide-react";
 import { ArrowButton } from "@/components/arrow-button";
 import { Control, Controller } from "react-hook-form";
-import { SelectedOptionType, formSchema } from "./post-forms";
+import { SelectedOptionType } from "./post-forms";
 import {
   Select,
   SelectContent,
@@ -37,9 +37,10 @@ import { SecondPartOfMainFeatures } from "./second-part-of-main-features";
 import { cn } from "@/lib/utils";
 import { CarDescriptionField } from "./car-description-field";
 import { FormHeadingContainer } from "./form-heading-container";
+import { carPostSchema } from "@/schemas";
 
 interface MainFeaturesProps {
-  control: Control<z.infer<typeof formSchema>>;
+  control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
   selectedOption: SelectedOptionType;
 }

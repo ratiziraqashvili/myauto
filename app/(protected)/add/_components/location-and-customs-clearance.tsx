@@ -4,7 +4,6 @@ import { ArrowButton } from "@/components/arrow-button";
 import { useState } from "react";
 import { MapPin } from "lucide-react";
 import { Control, Controller } from "react-hook-form";
-import { formSchema } from "./post-forms";
 import * as z from "zod";
 import { FormControl, FormItem, FormMessage } from "@/components/ui/form";
 import {
@@ -18,9 +17,10 @@ import { cn } from "@/lib/utils";
 import { locations } from "@/constants/locations";
 import { Switch } from "@/components/ui/switch";
 import { FormHeadingContainer } from "./form-heading-container";
+import { carPostSchema } from "@/schemas";
 
 interface LocationAndCustomsClearanceProps {
-  control: Control<z.infer<typeof formSchema>>;
+  control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
 }
 

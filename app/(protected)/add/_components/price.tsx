@@ -1,5 +1,4 @@
 import { Control, Controller, useWatch } from "react-hook-form";
-import { formSchema } from "./post-forms";
 import * as z from "zod";
 import FormContainer from "@/components/form-container";
 import { FormHeadingContainer } from "./form-heading-container";
@@ -12,9 +11,10 @@ import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
+import { carPostSchema } from "@/schemas";
 
 interface PriceProps {
-  control: Control<z.infer<typeof formSchema>>;
+  control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
 }
 

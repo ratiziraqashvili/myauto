@@ -1,10 +1,11 @@
 import { Control } from "react-hook-form";
 import * as z from "zod";
-import { SelectedOptionType, formSchema } from "./post-forms";
+import { SelectedOptionType } from "./post-forms";
 import { ToggleGroupField } from "./toggle-group-field";
+import { carPostSchema } from "@/schemas";
 
 interface SecondPartOfMainFeaturesProps {
-  control: Control<z.infer<typeof formSchema>>;
+  control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
   selectedOption: SelectedOptionType;
 }
@@ -17,7 +18,7 @@ export const SecondPartOfMainFeatures = ({
   return (
     <div className="flex flex-col gap-10 px-6 py-6 border-b">
       {selectedOption === "Car" && (
-        <ToggleGroupField<typeof formSchema>
+        <ToggleGroupField<typeof carPostSchema>
           control={control}
           name="steeringWheel"
           label="საჭე"

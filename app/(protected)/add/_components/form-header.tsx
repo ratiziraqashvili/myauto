@@ -8,15 +8,16 @@ import {
   UseFormSetValue,
 } from "react-hook-form";
 import { z } from "zod";
-import { SelectedOptionType, formSchema } from "./post-forms";
+import { SelectedOptionType } from "./post-forms";
 import { cn } from "@/lib/utils";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { carPostSchema } from "@/schemas";
 
 interface FormHeaderProps {
-  control: Control<z.infer<typeof formSchema>>;
+  control: Control<z.infer<typeof carPostSchema>>;
   selectedOption: string;
   setSelectedOption: (value: SelectedOptionType) => void;
-  reset: UseFormReset<z.infer<typeof formSchema>>;
+  reset: UseFormReset<z.infer<typeof carPostSchema>>;
 }
 
 export const FormHeader = ({
