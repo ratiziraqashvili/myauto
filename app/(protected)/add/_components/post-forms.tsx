@@ -92,23 +92,24 @@ export const PostForms = () => {
     setValue("ownerPhone", ownerPhoneNumber);
   }, [ownerFullName, ownerPhoneNumber, setValue]);
 
-  function onSubmit(values: z.infer<typeof carPostSchema>) {
+  const onSubmit = (values: z.infer<typeof carPostSchema>) => {
     startTransition(() => {
       carPost(values)
         .then((data) => {
           setError(data.error);
           setSuccess(data.success);
-          if (error) {
+          if (data.error) {
             toast({
               description: `დაფიქსირდა შეცდომა, ${error}.`,
               duration: 3000,
               variant: "destructive",
             });
-          } else if (success) {
+          } else if (data.success) {
             toast({
               description: "განცხადება წარმატებით დაემატა.",
               duration: 3000,
             });
+            console.log("Successssssss");
             router.push("/mypage/myads");
           }
         })
@@ -121,7 +122,10 @@ export const PostForms = () => {
           });
         });
     });
-  }
+  };
+
+  console.log(error);
+  console.log(success);
 
   return (
     <>
