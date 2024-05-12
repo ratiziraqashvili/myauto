@@ -16,9 +16,10 @@ import { carPostSchema } from "@/schemas";
 interface PriceProps {
   control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
+  isPending: boolean;
 }
 
-export const Price = ({ control, errors }: PriceProps) => {
+export const Price = ({ control, errors, isPending }: PriceProps) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const priceWithDeal = useWatch({ control, name: "priceWithDeal" });
 
@@ -49,7 +50,7 @@ export const Price = ({ control, errors }: PriceProps) => {
                         errors.price?.message && "border-destructive"
                       )}
                       placeholder="ჩაწერე ფასი"
-                      disabled={priceWithDeal}
+                      disabled={priceWithDeal || isPending}
                       value={priceWithDeal ? "" : field.value}
                     />
                   </FormControl>
@@ -73,7 +74,7 @@ export const Price = ({ control, errors }: PriceProps) => {
                         "py-[0.62rem] px-3 border rounded-r border-l-0",
                         errors.price?.message && "border-destructive"
                       )}
-                      disabled={priceWithDeal}
+                      disabled={priceWithDeal || isPending}
                     >
                       <ToggleGroupItem
                         className="data-[state=on]:bg-gray-200 rounded-full font-bold opacity-20 data-[state=on]:opacity-100 transition"
@@ -103,6 +104,7 @@ export const Price = ({ control, errors }: PriceProps) => {
                 <FormControl>
                   <div>
                     <Switch
+                      disabled={isPending}
                       checked={field.value}
                       onCheckedChange={field.onChange}
                     />
@@ -122,6 +124,7 @@ export const Price = ({ control, errors }: PriceProps) => {
                 <FormControl>
                   <div>
                     <Switch
+                      disabled={isPending}
                       checked={field.value}
                       onCheckedChange={field.onChange}
                     />

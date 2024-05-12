@@ -14,6 +14,7 @@ interface ImageUploadProps {
   isError?: boolean;
   setUploadedImagesCount: (value: number) => void;
   uploadedImagesCount: number;
+  isPending: boolean;
 }
 
 const ImageUpload = ({
@@ -23,6 +24,7 @@ const ImageUpload = ({
   isError,
   setUploadedImagesCount,
   uploadedImagesCount,
+  isPending,
 }: ImageUploadProps) => {
   const [isMounted, setIsMounted] = useState(false);
   const { toast } = useToast();
@@ -47,13 +49,15 @@ const ImageUpload = ({
       toast({
         description: "სურათში ვერ მოიძებნა მანქანა.",
         duration: 3000,
-        variant: "destructive"
+        variant: "destructive",
       });
     }
   };
 
   return (
-    <div className={cn("", uploadedImagesCount > 0 && "flex gap-x-2 flex-wrap")}>
+    <div
+      className={cn("", uploadedImagesCount > 0 && "flex gap-x-2 flex-wrap")}
+    >
       <div className="pb-5 gap-3 overflow-auto flex">
         {value.map((url) => (
           <div
@@ -62,6 +66,7 @@ const ImageUpload = ({
           >
             <div className="z-10 absolute top-1 right-1">
               <Button
+                disabled={isPending}
                 type="button"
                 onClick={() => onRemove(url)}
                 size="sm"

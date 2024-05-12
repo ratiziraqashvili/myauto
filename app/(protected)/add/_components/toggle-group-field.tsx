@@ -20,6 +20,7 @@ interface ToggleGroupFieldProps<Schema extends z.ZodType<any, any>> {
   errors: any;
   options: { value: string; label: string; color?: string }[];
   type?: ToggleType;
+  isPending?: boolean;
 }
 
 export const ToggleGroupField = <Schema extends z.ZodType<any, any>>({
@@ -29,6 +30,7 @@ export const ToggleGroupField = <Schema extends z.ZodType<any, any>>({
   errors,
   options,
   type,
+  isPending,
 }: ToggleGroupFieldProps<Schema>) => {
   if (type === "multiple") {
     return (
@@ -45,6 +47,7 @@ export const ToggleGroupField = <Schema extends z.ZodType<any, any>>({
             </FormMessage>
             <FormControl>
               <ToggleGroup
+                disabled={isPending}
                 value={field.value}
                 onValueChange={(value) => field.onChange(value)}
                 className="flex gap-x-4 gap-y-2 flex-wrap pt-2"
@@ -81,6 +84,7 @@ export const ToggleGroupField = <Schema extends z.ZodType<any, any>>({
           <FormMessage>{errors[name]?.message as React.ReactNode}</FormMessage>
           <FormControl>
             <ToggleGroup
+              disabled={isPending}
               value={field.value}
               onValueChange={(value) => field.onChange(value)}
               className="flex gap-x-4 gap-y-2 flex-wrap pt-2"

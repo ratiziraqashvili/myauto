@@ -43,6 +43,7 @@ interface MainFeaturesProps {
   control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
   selectedOption: SelectedOptionType;
+  isPending: boolean;
 }
 
 interface ModelType {
@@ -56,6 +57,7 @@ export const MainFeatures = ({
   control,
   errors,
   selectedOption,
+  isPending,
 }: MainFeaturesProps) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [brand, setBrand] = useState("");
@@ -123,6 +125,7 @@ export const MainFeatures = ({
                 <FormItem>
                   <FormControl>
                     <Select
+                      disabled={isPending}
                       onValueChange={(value) => {
                         field.onChange(value);
                         onBrandChange(value);
@@ -160,7 +163,7 @@ export const MainFeatures = ({
                 <FormItem>
                   <FormControl>
                     <Select
-                      disabled={!isThereModel}
+                      disabled={!isThereModel || isPending}
                       onValueChange={field.onChange}
                     >
                       <SelectTrigger className="w-full">
@@ -188,7 +191,11 @@ export const MainFeatures = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input {...field} placeholder="სხვა მოდელი" />
+                    <Input
+                      disabled={isPending}
+                      {...field}
+                      placeholder="სხვა მოდელი"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -200,7 +207,7 @@ export const MainFeatures = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Select onValueChange={field.onChange}>
+                    <Select disabled={isPending} onValueChange={field.onChange}>
                       <SelectTrigger
                         className={cn(
                           "w-full",
@@ -232,7 +239,7 @@ export const MainFeatures = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Select onValueChange={field.onChange}>
+                    <Select disabled={isPending} onValueChange={field.onChange}>
                       <SelectTrigger
                         className={cn(
                           "w-full",
@@ -264,7 +271,7 @@ export const MainFeatures = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Select onValueChange={field.onChange}>
+                    <Select disabled={isPending} onValueChange={field.onChange}>
                       <SelectTrigger
                         className={cn(
                           "w-full",
@@ -296,7 +303,7 @@ export const MainFeatures = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Select onValueChange={field.onChange}>
+                    <Select disabled={isPending} onValueChange={field.onChange}>
                       <SelectTrigger
                         className={cn(
                           "w-full",
@@ -331,7 +338,7 @@ export const MainFeatures = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Select onValueChange={field.onChange}>
+                    <Select disabled={isPending} onValueChange={field.onChange}>
                       <SelectTrigger
                         className={cn(
                           "w-full",
@@ -365,6 +372,7 @@ export const MainFeatures = ({
                   <FormControl>
                     <div className="border border-input bg-background hover:bg-accent hover:text-accent-foreground inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 w-full">
                       <Switch
+                        disabled={isPending}
                         checked={field.value}
                         onCheckedChange={field.onChange}
                       />
@@ -381,7 +389,7 @@ export const MainFeatures = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Select onValueChange={field.onChange}>
+                    <Select disabled={isPending} onValueChange={field.onChange}>
                       <SelectTrigger
                         className={cn(
                           "w-full",
@@ -417,6 +425,7 @@ export const MainFeatures = ({
                 <FormItem>
                   <FormControl>
                     <Input
+                    disabled={isPending}
                       className={cn(
                         "w-full",
                         errors.mileage && "border-destructive"
@@ -440,7 +449,7 @@ export const MainFeatures = ({
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Select onValueChange={field.onChange}>
+                    <Select disabled={isPending} onValueChange={field.onChange}>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="კმ" />
                       </SelectTrigger>
@@ -458,8 +467,9 @@ export const MainFeatures = ({
             selectedOption={selectedOption}
             errors={errors}
             control={control}
+            isPending={isPending}
           />
-          <CarDescriptionField errors={errors} control={control} />
+          <CarDescriptionField isPending={isPending} errors={errors} control={control} />
         </>
       )}
     </FormContainer>

@@ -19,9 +19,10 @@ import { carPostSchema } from "@/schemas";
 interface ContactInfoProps {
   control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
+  isPending: boolean;
 }
 
-export const ContactInfo = ({ control, errors }: ContactInfoProps) => {
+export const ContactInfo = ({ control, errors, isPending }: ContactInfoProps) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   const onExpand = () => {
@@ -50,7 +51,7 @@ export const ContactInfo = ({ control, errors }: ContactInfoProps) => {
                   </FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <Input className="pl-10" {...field} value={field.value} />
+                      <Input disabled={isPending} className="pl-10" {...field} value={field.value} />
                       <CircleUser className="absolute left-2 top-2" />
                     </div>
                   </FormControl>
@@ -71,7 +72,7 @@ export const ContactInfo = ({ control, errors }: ContactInfoProps) => {
                 </FormLabel>
                 <FormControl>
                     <div className="relative">
-                      <Input className="pl-10" {...field} value={field.value} />
+                      <Input disabled={isPending} className="pl-10" {...field} value={field.value} />
                       <Smartphone className="absolute left-2 top-2" />
                     </div>
                   </FormControl>

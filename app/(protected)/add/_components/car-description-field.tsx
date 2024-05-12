@@ -11,6 +11,7 @@ import { carPostSchema } from "@/schemas";
 interface CarDescriptionFieldProps {
   control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
+  isPending: boolean;
 }
 
 const MAX_SYMBOLS = 4000;
@@ -18,6 +19,7 @@ const MAX_SYMBOLS = 4000;
 export const CarDescriptionField = ({
   control,
   errors,
+  isPending,
 }: CarDescriptionFieldProps) => {
   const [remainingSymbols, setRemainingSymbols] = useState(MAX_SYMBOLS);
 
@@ -37,6 +39,7 @@ export const CarDescriptionField = ({
               </FormMessage>
               <FormControl>
                 <Textarea
+                  disabled={isPending}
                   maxLength={MAX_SYMBOLS}
                   onChange={(e) => {
                     setRemainingSymbols(MAX_SYMBOLS - e.target.value.length);

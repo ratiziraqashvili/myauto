@@ -20,9 +20,14 @@ import { carPostSchema } from "@/schemas";
 interface ImageAndVideoProps {
   control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
+  isPending: boolean;
 }
 
-export const ImageAndVideo = ({ control, errors }: ImageAndVideoProps) => {
+export const ImageAndVideo = ({
+  control,
+  errors,
+  isPending,
+}: ImageAndVideoProps) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [uploadedImagesCount, setUploadedImagesCount] = useState<number>(0);
 
@@ -55,6 +60,7 @@ export const ImageAndVideo = ({ control, errors }: ImageAndVideoProps) => {
                   </FormMessage>
                   <FormControl>
                     <ImageUpload
+                      isPending={isPending}
                       uploadedImagesCount={uploadedImagesCount}
                       setUploadedImagesCount={setUploadedImagesCount}
                       isError={!!errors.images?.message}
@@ -89,6 +95,7 @@ export const ImageAndVideo = ({ control, errors }: ImageAndVideoProps) => {
                 <FormControl>
                   <div className="relative">
                     <Input
+                      disabled={isPending}
                       className="focus-visible:ring-0 focus-visible:ring-none focus-visible:ring-offset-0 border-dashed border border-[#4b94ee] py-7 rounded-xl pl-14 placeholder:text-muted-foreground"
                       placeholder="მაგ. https://www.youtube.com/watch..."
                       {...field}

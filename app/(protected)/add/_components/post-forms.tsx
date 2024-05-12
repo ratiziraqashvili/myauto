@@ -106,10 +106,9 @@ export const PostForms = () => {
             });
           } else if (data.success) {
             toast({
-              description: "განცხადება წარმატებით დაემატა.",
+              description: `${success}.`,
               duration: 3000,
             });
-            console.log("Successssssss");
             router.push("/mypage/myads");
           }
         })
@@ -124,9 +123,6 @@ export const PostForms = () => {
     });
   };
 
-  console.log(error);
-  console.log(success);
-
   return (
     <>
       <PostDetails />
@@ -140,17 +136,35 @@ export const PostForms = () => {
             selectedOption={selectedOption}
             setSelectedOption={setSelectedOption}
             control={control}
+            isPending={isPending}
           />
           <MainFeatures
             selectedOption={selectedOption}
             errors={errors}
             control={control}
+            isPending={isPending}
           />
-          <LocationAndCustomsClearance control={control} errors={errors} />
-          <ImageAndVideo control={control} errors={errors} />
-          <Price control={control} errors={errors} />
-          <ContactInfo control={control} errors={errors} />
-          <Button className="text-white py-7 px-9" variant="amber">
+          <LocationAndCustomsClearance
+            isPending={isPending}
+            control={control}
+            errors={errors}
+          />
+          <ImageAndVideo
+            isPending={isPending}
+            control={control}
+            errors={errors}
+          />
+          <Price isPending={isPending} control={control} errors={errors} />
+          <ContactInfo
+            isPending={isPending}
+            control={control}
+            errors={errors}
+          />
+          <Button
+            disabled={isPending}
+            className="text-white py-7 px-9"
+            variant="amber"
+          >
             გამოქვეყნება
           </Button>
         </form>

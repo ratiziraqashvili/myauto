@@ -18,6 +18,7 @@ interface FormHeaderProps {
   selectedOption: string;
   setSelectedOption: (value: SelectedOptionType) => void;
   reset: UseFormReset<z.infer<typeof carPostSchema>>;
+  isPending: boolean;
 }
 
 export const FormHeader = ({
@@ -25,6 +26,7 @@ export const FormHeader = ({
   selectedOption,
   setSelectedOption,
   reset,
+  isPending,
 }: FormHeaderProps) => {
   const buttons = [
     {
@@ -68,6 +70,7 @@ export const FormHeader = ({
           <div className="flex justify-center px-5 lg:px-10 border-b">
             {buttons.map((button) => (
               <Button
+                disabled={isPending}
                 className={cn(
                   "py-6 px-5 hover:bg-white border-opacity-0 rounded-none transition w-full",
                   selectedOption === button.value &&
@@ -105,12 +108,14 @@ export const FormHeader = ({
         render={({ field }) => (
           <div className="px-10 py-7">
             <RadioGroup
+              disabled={isPending}
               onValueChange={field.onChange}
               defaultValue={field.value}
               className="flex gap-9"
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem
+                  disabled={isPending}
                   className={cn(
                     "bg-white border-gray-300 border-2 size-5 transition duration-500",
                     field.value === "ForSale" && "border-[#fd4100]"
@@ -131,6 +136,7 @@ export const FormHeader = ({
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem
+                  disabled={isPending}
                   className={cn(
                     "bg-white border-gray-300 border-2 size-5 transition duration-500",
                     field.value === "ForRent" && "border-[#fd4100]"

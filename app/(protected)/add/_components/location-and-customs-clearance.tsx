@@ -22,11 +22,13 @@ import { carPostSchema } from "@/schemas";
 interface LocationAndCustomsClearanceProps {
   control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
+  isPending: boolean;
 }
 
 export const LocationAndCustomsClearance = ({
   control,
   errors,
+  isPending
 }: LocationAndCustomsClearanceProps) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [location, setLocation] = useState("");
@@ -52,6 +54,7 @@ export const LocationAndCustomsClearance = ({
               <FormItem>
                 <FormControl>
                   <Select
+                  disabled={isPending}
                     onValueChange={(value) => {
                       field.onChange(value);
                       setLocation(value);
@@ -90,7 +93,7 @@ export const LocationAndCustomsClearance = ({
                 <FormControl>
                   <div>
                     <Switch
-                      disabled={!isLocation}
+                      disabled={!isLocation || isPending}
                       checked={field.value}
                       onCheckedChange={field.onChange}
                     />
@@ -116,7 +119,7 @@ export const LocationAndCustomsClearance = ({
                 <FormControl>
                   <div>
                     <Switch
-                      disabled={!isLocation}
+                      disabled={!isLocation || isPending}
                       checked={field.value}
                       onCheckedChange={field.onChange}
                     />

@@ -8,12 +8,14 @@ interface SecondPartOfMainFeaturesProps {
   control: Control<z.infer<typeof carPostSchema>>;
   errors: any;
   selectedOption: SelectedOptionType;
+  isPending: boolean;
 }
 
 export const SecondPartOfMainFeatures = ({
   control,
   errors,
   selectedOption,
+  isPending,
 }: SecondPartOfMainFeaturesProps) => {
   return (
     <div className="flex flex-col gap-10 px-6 py-6 border-b">
@@ -27,6 +29,7 @@ export const SecondPartOfMainFeatures = ({
             { value: "Right", label: "მარჯვენა" },
             { value: "Left", label: "მარცხენა" },
           ]}
+          isPending={isPending}
         />
       )}
       <ToggleGroupField
@@ -40,6 +43,7 @@ export const SecondPartOfMainFeatures = ({
           { value: "Tiptronic", label: "ტიპტრონიკი" },
           { value: "Variator", label: "ვარიატორი" },
         ]}
+        isPending={isPending}
       />
       <ToggleGroupField
         control={control}
@@ -56,6 +60,7 @@ export const SecondPartOfMainFeatures = ({
           { value: "NaturalGas", label: "ბუნებრივი გაზი" },
           { value: "Hydrogen", label: "წყალბადი" },
         ]}
+        isPending={isPending}
       />
       <ToggleGroupField
         control={control}
@@ -67,6 +72,7 @@ export const SecondPartOfMainFeatures = ({
           { value: "Back", label: "უკანა" },
           { value: "Four_Four", label: "4x4" },
         ]}
+        isPending={isPending}
       />
       {selectedOption !== "Motorcycle" && (
         <ToggleGroupField
@@ -79,6 +85,7 @@ export const SecondPartOfMainFeatures = ({
             { value: "Four_Five", label: "4/5" },
             { value: "Greater_Than_Five", label: ">5" },
           ]}
+          isPending={isPending}
         />
       )}
       {selectedOption === "Car" && (
@@ -91,6 +98,7 @@ export const SecondPartOfMainFeatures = ({
             { value: "true", label: "კი" },
             { value: "false", label: "არა" },
           ]}
+          isPending={isPending}
         />
       )}
       <ToggleGroupField
@@ -116,6 +124,7 @@ export const SecondPartOfMainFeatures = ({
           { value: "SkyBlue", label: "ცისფერი", color: "#a2d2ff" },
           { value: "Brown", label: "ყავისფერი", color: "#926644" },
         ]}
+        isPending={isPending}
       />
       <div className="space-y-6">
         {selectedOption === "Car" && (
@@ -130,6 +139,7 @@ export const SecondPartOfMainFeatures = ({
                 { value: "Leather", label: "ტყავი" },
                 { value: "ArtificialLeather", label: "ხელოვნური ტყავი" },
               ]}
+              isPending={isPending}
             />
             <ToggleGroupField
               control={control}
@@ -149,6 +159,7 @@ export const SecondPartOfMainFeatures = ({
                 { value: "Burgundy", label: "შინდისფერი", color: "#990000" },
                 { value: "Gold", label: "ოქროსფერი", color: "#d4af37" },
               ]}
+              isPending={isPending}
             />
           </>
         )}
@@ -195,6 +206,7 @@ export const SecondPartOfMainFeatures = ({
                 { value: "სსმპ ადაპტირებული", label: "სსმპ ადაპტირებული" },
               ]}
               type="multiple"
+              isPending={isPending}
             />
           ) : (
             <ToggleGroupField
@@ -208,6 +220,7 @@ export const SecondPartOfMainFeatures = ({
                 { value: "ელექტრო სტარტერი", label: "ელექტრო სტარტერი" },
               ]}
               type="multiple"
+              isPending={isPending}
             />
           ))}
       </div>
