@@ -34,7 +34,6 @@ const ImageUpload = ({
   if (!isMounted) return null;
 
   const onUpload = (result: any, widget: any) => {
-    console.log(result);
     widget.close();
     const uploadResultsTags =
       result.info?.info?.detection?.object_detection?.data.coco?.tags;

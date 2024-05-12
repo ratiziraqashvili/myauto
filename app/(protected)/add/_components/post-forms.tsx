@@ -3,18 +3,19 @@
 import { Form } from "@/components/ui/form";
 import { FormHeader } from "./form-header";
 
+import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 import { MainFeatures } from "./main-features";
 import { PostDetails } from "./post-details";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { LocationAndCustomsClearance } from "./location-and-customs-clearance";
 import { ImageAndVideo } from "./image-and-video";
 import { Price } from "./price";
 import { ContactInfo } from "./contact-info";
-import { useSession } from "next-auth/react";
-import { CustomUser } from "@/auth";
+import { Button } from "@/components/ui/button";
+import { carPost } from "@/actions/car-post";
+import { useCurrentUser } from "@/hooks/user-current-user";
 
 const VehicleType = z.enum(["Car", "SpecialVehicle", "Motorcycle"]);
 const RentingType = z.enum(["ForSale", "ForRent"]);
@@ -98,9 +99,9 @@ export type SelectedOptionType = "Car" | "SpecialVehicle" | "Motorcycle";
 export const PostForms = () => {
   const [selectedOption, setSelectedOption] =
     useState<SelectedOptionType>("Car");
+  const [isPending, startTransition] = useTransition();
 
-  const { data: session } = useSession();
-  const sessionUser = session?.user as CustomUser;
+  const sessionUser = useCurrentUser();
   const ownerFullName = sessionUser
     ? `${sessionUser.name} ${sessionUser.lastName}`.toLowerCase()
     : "";
@@ -161,10 +162,10 @@ export const PostForms = () => {
     setValue("ownerPhone", ownerPhoneNumber);
   }, [ownerFullName, ownerPhoneNumber, setValue]);
 
-  console.log(errors);
-
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("submit", values);
+    startTransition(() => {
+      carPost(values);
+    });
   }
 
   return (
@@ -190,7 +191,9 @@ export const PostForms = () => {
           <ImageAndVideo control={control} errors={errors} />
           <Price control={control} errors={errors} />
           <ContactInfo control={control} errors={errors} />
-          <button type="submit">submit</button>
+          <Button className="text-white py-7 px-9" variant="amber">
+            გამოქვეყნება
+          </Button>
         </form>
       </Form>
     </>
