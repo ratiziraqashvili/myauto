@@ -61,7 +61,7 @@ export const FormHeader = ({
   return (
     <FormContainer>
       <Controller
-        name="vehicleType"
+        name="vehicle"
         control={control}
         render={({ field }) => (
           <div className="flex justify-center px-5 lg:px-10 border-b">
@@ -99,7 +99,7 @@ export const FormHeader = ({
         )}
       />
       <Controller
-        name="rentingType"
+        name="renting"
         control={control}
         render={({ field }) => (
           <div className="px-10 py-7">

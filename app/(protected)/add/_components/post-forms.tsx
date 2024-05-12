@@ -16,6 +16,7 @@ import { ContactInfo } from "./contact-info";
 import { Button } from "@/components/ui/button";
 import { carPost } from "@/actions/car-post";
 import { useCurrentUser } from "@/hooks/user-current-user";
+import { useToast } from "@/components/ui/use-toast";
 
 const VehicleType = z.enum(["Car", "SpecialVehicle", "Motorcycle"]);
 const RentingType = z.enum(["ForSale", "ForRent"]);
@@ -50,8 +51,8 @@ const InteriorMaterialType = z.enum(["Piece", "Leather", "ArtificialLeather"], {
 const CurrencyType = z.enum(["GEL", "USD"], { message: "შეავსე ველი" });
 
 export const formSchema = z.object({
-  vehicleType: VehicleType,
-  rentingType: RentingType,
+  vehicle: VehicleType,
+  renting: RentingType,
   manufacturer: z.string().min(1, "შეავსე ველი"),
   model: z.string().optional(),
   customModel: z.string().optional(),
@@ -99,6 +100,9 @@ export type SelectedOptionType = "Car" | "SpecialVehicle" | "Motorcycle";
 export const PostForms = () => {
   const [selectedOption, setSelectedOption] =
     useState<SelectedOptionType>("Car");
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+  const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
   const sessionUser = useCurrentUser();
@@ -110,8 +114,8 @@ export const PostForms = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      vehicleType: "Car",
-      rentingType: "ForSale",
+      vehicle: "Car",
+      renting: "ForSale",
       manufacturer: "",
       model: "",
       customModel: "",
@@ -164,7 +168,31 @@ export const PostForms = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(() => {
-      carPost(values);
+      carPost(values)
+        .then((data) => {
+          setError(data.error);
+          setSuccess(data.success);
+          if (error) {
+            toast({
+              description: `დაფიქსირდა შეცდომა, ${error}.`,
+              duration: 3000,
+              variant: "destructive",
+            });
+          } else if (success) {
+            toast({
+              description: "განცხადება წარმატებით დაემატა.",
+              duration: 3000,
+            });
+          }
+        })
+        .catch((e) => {
+          console.error("error on carPost", e);
+          toast({
+            description: `დაფიქსირდა შეცდომა, ${error}.`,
+            duration: 3000,
+            variant: "destructive",
+          });
+        });
     });
   }
 

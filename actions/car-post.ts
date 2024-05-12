@@ -12,29 +12,35 @@ export const carPost = async (values: z.infer<typeof formSchema>) => {
     const user = await currentUser();
 
     if (!user) {
-        return { error: "Unauthorized" }
+        return { error: "არა ავტორიზებული" }
     }
 
     const dbUser = await getUserById(user.id!);
 
-    const { catalyst } = values;
-
-    const booleanCatalyst = removeQuotes(catalyst);
+    if (!dbUser || !dbUser.id) {
+        return { error: "აუთენტიფიცირებული" }
+    }
 
     if (!validatedFields.success) {
         return { error: "Invalid fields!" };
     }
 
-    console.log(dbUser)
+    const { catalyst, images } = validatedFields.data;
 
-    const vehicle = await db.vehicle.create({
-        where: {
-            id: dbUser?.id
-        },
+    const booleanCatalyst = removeQuotes(catalyst);
+
+    await db.vehicle.create({
         data: {
-            ...values,
-            catalyst: booleanCatalyst!,
-            userId: dbUser?.id,
+            ...validatedFields.data,
+           userId: dbUser.id,
+           catalyst: booleanCatalyst!,
+           images: {
+            create: images.map((image) => ({
+              url: image.url,
+            })),
+          },
         }
     })
+
+    return { success: "განცხადება წარმატებით დაემატა" }
 }
