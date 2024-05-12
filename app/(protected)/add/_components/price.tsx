@@ -11,6 +11,7 @@ import { FormControl, FormItem, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Switch } from "@/components/ui/switch";
+import { cn } from "@/lib/utils";
 
 interface PriceProps {
   control: Control<z.infer<typeof formSchema>>;
@@ -39,19 +40,22 @@ export const Price = ({ control, errors }: PriceProps) => {
               name="price"
               render={({ field }) => (
                 <FormItem>
-                  <FormMessage>
-                    {errors.price?.message as React.ReactNode}
-                  </FormMessage>
                   <FormControl>
                     <Input
                       type="number"
                       {...field}
-                      className="py-7 rounded-r-none w-[15rem]"
+                      className={cn(
+                        "py-7 rounded-r-none w-[15rem]",
+                        errors.price?.message && "border-destructive"
+                      )}
                       placeholder="ჩაწერე ფასი"
                       disabled={priceWithDeal}
                       value={priceWithDeal ? "" : field.value}
                     />
                   </FormControl>
+                  <FormMessage>
+                    {errors.price?.message as React.ReactNode}
+                  </FormMessage>
                 </FormItem>
               )}
             />
@@ -65,7 +69,10 @@ export const Price = ({ control, errors }: PriceProps) => {
                       value={field.value}
                       onValueChange={(value) => field.onChange(value)}
                       type="single"
-                      className="py-[0.62rem] px-3 border rounded-r"
+                      className={cn(
+                        "py-[0.62rem] px-3 border rounded-r border-l-0",
+                        errors.price?.message && "border-destructive"
+                      )}
                       disabled={priceWithDeal}
                     >
                       <ToggleGroupItem

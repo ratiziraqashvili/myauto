@@ -1,4 +1,4 @@
-export const removeQuotes = (str: "true" | "false") => {
+export const removeQuotes = (str: string) => {
     if (str === "true") {
         return true;
     } else if (str === "false") {

@@ -100,8 +100,8 @@ model Vehicle {
   vehicle               VehicleType
   renting               RentingType
   manufacturer          String
-  model                 String
-  customModel           String
+  model                 String?
+  customModel           String?
   category              String
   year                  String
   month                 String
@@ -126,7 +126,7 @@ model Vehicle {
   customsClearance      Boolean
   techView              Boolean
   images                Image[]
-  video                 String               @db.Text
+  video                 String?               @db.Text
   price                 String
   currency              CurrencyType
   priceWithDeal         Boolean
