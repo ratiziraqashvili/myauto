@@ -1,4 +1,4 @@
-import { Container } from "@/components/container";
+import { ChildrenContainer } from "@/components/children-container";
 import { MobileBottomNavbar } from "@/components/mobile-bottom-navbar";
 import { Navbar } from "@/components/navbar";
 
@@ -6,7 +6,7 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <Navbar />
-      <div className="bg-[#f2f3f6] h-full pt-[4.5rem]">{children}</div>
+      <ChildrenContainer>{children}</ChildrenContainer>
       <MobileBottomNavbar className="max-w-[100rem]" />
     </div>
   );
