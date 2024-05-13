@@ -8,7 +8,7 @@ import { LoginButton } from "./auth/login-button";
 import { useSession } from "next-auth/react";
 import { ProfilePicture } from "./profile-picture";
 
-export const MobileBottomNavbar = ({ className }: { className: string }) => {
+export const MobileBottomNavbar = ({ className }: { className?: string }) => {
   const { status } = useSession();
   const pathname = usePathname();
 
