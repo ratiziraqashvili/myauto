@@ -29,16 +29,20 @@ export const carPost = async (values: z.infer<typeof carPostSchema>) => {
 
     const booleanCatalyst = removeQuotes(catalyst);
 
+    const currentDate = new Date();
+    const expiresAt = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, currentDate.getDate());
+
     await db.vehicle.create({
         data: {
             ...validatedFields.data,
            userId: dbUser.id,
            catalyst: booleanCatalyst!,
            images: {
-            create: images.map((image) => ({
-              url: image.url,
-            })),
-          },
+               create: images.map((image) => ({
+                   url: image.url,
+                })),
+            },
+            expiresAt,
         }
     })
 
